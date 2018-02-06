@@ -4,7 +4,7 @@
     playerImage = new Image();
     playerImage.src = "images/witch.svg";
 
-    var player = { x:200, y: 200, size: 100, img: playerImage, speed: 4};
+    var player = { x:200, y: 200, size: 100, img: playerImage, speed: 4, dir: 0};
 
 
 
@@ -17,11 +17,22 @@
                 obj.width = obj.size;
                 obj.height = obj.size;
             }
+
+            if (obj.dir && obj.dir !== 0) {
+                var rad = obj.dir * (Math.PI/180);
+               ctx.translate(obj.x + (obj.width /2), obj.y + (obj.y / 2))
+                ctx.rotate(rad);
+            }
             ctx.drawImage(obj.img, 
-                          obj.x - (obj.width / 2), 
-                          obj.y - (obj.height /2), 
+                          obj.width / 2, 
+                          obj.height / 2, 
                           obj.width, 
                           obj.height);
+            
+            if (obj.dir && obj.dir !== 0) {
+                ctx.rotate(-rad);
+               ctx.translate(-obj.x - (obj.width /2), -obj.y - (obj.y / 2))
+            }
         } else {
             console.log("Not enough attributes to render Object: "+obj);
         }
@@ -90,8 +101,11 @@ function drawBackground() {
 function doMovement() {
      keyStates.u && (player.y -= player.speed);
      keyStates.d && (player.y += player.speed);
-     keyStates.l && (player.x -= player.speed);
-     keyStates.r && (player.x += player.speed);
+//     keyStates.l && (player.x -= player.speed);
+//    keyStates.r && (player.x += player.speed);
+     keyStates.l && (player.dir -= player.speed/10);
+    keyStates.r && (player.dir += player.speed/10);
+     
     
 };
 
