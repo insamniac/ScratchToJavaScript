@@ -1,100 +1,9 @@
-imageFlipper = function(originalImage) {
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
-    var newImage = new Image();
-    canvas.width = originalImage.width;
-    canvas.height = originalImage.height;
-    ctx.setTransform(-1, 0, 0, 1, canvas.width, 0);
-    ctx.drawImage(originalImage, 0, 0);
-    newImage.src = canvas.toDataURL();
-    return newImage;
-};
-
-
-var player = {
-    x: 200,
-    y: 200,
-    size: 100,
-    img: {},
-    speed: 4,
-    dir: {
-        x: 0,
-        y: 0
-    }
-};
-
-playerImage = new Image();
-playerImage.src = 'images/witch.png';
-playerImage.addEventListener('load', function(e) {
-    console.log(e);
-    player.img.right = playerImage;
-    player.img.left = imageFlipper(playerImage);
-    player.costume = player.img.right;
-});
-
-
-
-
-
-
-var render = function(obj, ctx) {
-    if (obj.render && typeof(obj.render) === 'function') {
-        return obj.render(ctx);
-    }
-    if (obj.costume && obj.costume.complete && obj.x && obj.y && ((obj.height && obj.width) || obj.size)) {
-
-        if (obj.size) {
-            obj.width = obj.size;
-            obj.height = obj.size;
-        }
-
-        ctx.translate(obj.x + (obj.width / 2), obj.y + (obj.y / 2));
-        ctx.drawImage(obj.costume, -obj.width / 2, -obj.height / 2,
-            obj.width,
-            obj.height);
-
-        ctx.translate(-obj.x - (obj.width / 2), -obj.y - (obj.y / 2));
-
-    } else {
-        console.log('Not enough attributes to render Object: ' + obj);
-        console.log(obj);
-    }
-};
-
-var GAMEOVER = false;
-var ENEMY_DELAY = 2;
-var nextEnemy = 4;
-var gameObjects = [];
-var keyStates = {};
-
-
-
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
-
-var backgroundImage = new Image();
-backgroundImage.src = 'images/background.png';
-
 function shootTiny() {
     var b = makeBullet();
     // we can change the origina bullet's properties
     b.size = 5;
 
     gameObjects.push(b);
-}
-window.addEventListener('resize', resizeCanvas, false);
-window.addEventListener('keydown', handleKeyEvent, false);
-window.addEventListener('keyup', handleKeyEvent, false);
-
-function init() {
-    player.y = canvas.height / 2;
-    player.x = canvas.width / 2;
-    console.log(player);
-}
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
 }
 
 
@@ -261,38 +170,6 @@ function doMovement() {
             }
         }
     });
-}
-
-function areTouching(obj1, obj2) {
-    var dx = obj1.x - obj2.x;
-    var dy = obj1.y - obj2.y;
-    var distance = Math.sqrt(dx * dx + dy * dy);
-    return (distance < (obj1.size / 2 + obj2.size / 2));
-}
-
-function getRandomBetween(x, y) {
-    return Math.floor(Math.random() * y) + x;
-}
-
-function checkCollisions() {
-
-    // check enemy/bullet collisions
-    gameObjects.forEach(function(obj1) {
-        if (obj1.type == 'enemy') {
-            gameObjects.forEach(function(obj2) {
-                if (obj2.type == 'bullet') {
-                    if (areTouching(obj1, obj2)) {
-                        obj1.destroy = true;
-                        obj2.destroy = true;
-                        console.log('OMG DESTROYED');
-                        console.log(obj1);
-                        console.log(obj2);
-                    }
-                }
-            });
-        }
-    });
-
 }
 
 function doRendering() {

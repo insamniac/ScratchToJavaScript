@@ -24,7 +24,7 @@ var player = {
 };
 
 playerImage = new Image();
-playerImage.src = 'images/witch.png';
+playerImage.src = 'images/witch.svg';
 playerImage.addEventListener('load', function(e) {
     console.log(e);
     player.img.right = playerImage;
@@ -32,7 +32,9 @@ playerImage.addEventListener('load', function(e) {
     player.costume = player.img.right;
 });
 
-
+bulletImage = new Image();
+bulletImage.src = 'images/bullet.svg';
+bulletSound = new Audio('audio/bullet.wav');
 
 
 
@@ -62,7 +64,7 @@ var render = function(obj, ctx) {
 };
 
 var GAMEOVER = false;
-var ENEMY_DELAY = 2;
+var ENEMY_DELAY = 10;
 var nextEnemy = 4;
 var gameObjects = [];
 var keyStates = {};
@@ -75,13 +77,6 @@ var context = canvas.getContext('2d');
 var backgroundImage = new Image();
 backgroundImage.src = 'images/background.png';
 
-function shootTiny() {
-    var b = makeBullet();
-    // we can change the origina bullet's properties
-    b.size = 5;
-
-    gameObjects.push(b);
-}
 window.addEventListener('resize', resizeCanvas, false);
 window.addEventListener('keydown', handleKeyEvent, false);
 window.addEventListener('keyup', handleKeyEvent, false);
@@ -97,33 +92,16 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 
-
-
-bulletImage = new Image();
-bulletImage.src = 'images/bullet.svg';
-//  bulletSound = new Audio('audio/bullet.wav');
-
-purpleBulletImage = new Image();
-purpleBulletImage.src = 'images/purplestickyball.png';
-
-iceImage = new Image();
-iceImage.src = 'images/fireworkfreezingiceball.png';
-
-enemyImage = new Image();
-enemyImage.src = 'images/dragon.png';
-
-function makeBullet() {
+function shoot() {
 
     var bullet = {
         type: 'bullet',
-        speed: 20,
+        speed: 6,
         size: 15,
         costume: bulletImage,
-        crazy: true,
         dir: {
             y: 0
         },
-
         y: player.y
     };
 
@@ -136,45 +114,11 @@ function makeBullet() {
         bullet.x = player.x;
 
     }
-    return bullet;
+
+    gameObjects.push(bullet);
 
 
 }
-
-function shoot() {
-    gameObjects.push(makeBullet());
-}
-
-function shootBig() {
-    var b = makeBullet();
-    b.size = 60;
-    b.costume = purpleBulletImage;
-    b.dir.y = 0.5 - Math.random();
-    b.crazy = true;
-    gameObjects.push(b);
-}
-
-function shootTiny() {
-    var b = makeBullet();
-    // we can change the origina bullet's properties
-    b.size = 5;
-    b.speed = 30;
-    b.dir.y = 0.5 - Math.random();
-    b.crazy = true;
-    gameObjects.push(b);
-}
-
-function shootIcy() {
-    var b = makeBullet();
-    // we can change the origina bullet's properties
-    b.size = 80;
-    7;
-    b.costume = iceImage;
-    b.dir.y = 0.5 - Math.random();
-    b.crazy = true;
-    gameObjects.push(b);
-}
-
 
 function handleKeyEvent(e) {
     var status = e.type === 'keydown';
@@ -200,21 +144,6 @@ function handleKeyEvent(e) {
         case ' ':
             if (status) {
                 shoot();
-            }
-            break;
-        case 'f':
-            if (status) {
-                shootBig();
-            }
-            break;
-        case 't':
-            if (status) {
-                shootTiny();
-            }
-            break;
-        case 'g':
-            if (status) {
-                shootIcy();
             }
             break;
     }
@@ -244,54 +173,10 @@ function doMovement() {
     gameObjects.forEach(function(obj) {
         obj.x += obj.speed * obj.dir.x;
         obj.y += obj.speed * obj.dir.y;
-        if (obj.crazy) {
-            obj.dir.y -= 0.5 - Math.random();
-            obj.size -= (0.5 - Math.random()) * 5;
-        }
-        if (obj.type === 'enemy') {
-            if (obj.x > player.x) {
-                obj.dir.x = -1;
-            } else {
-                obj.dir.x = 1;
-            }
-            if (obj.y > player.y) {
-                obj.dir.y = -1;
-            } else {
-                obj.dir.y = 1;
-            }
-        }
     });
-}
-
-function areTouching(obj1, obj2) {
-    var dx = obj1.x - obj2.x;
-    var dy = obj1.y - obj2.y;
-    var distance = Math.sqrt(dx * dx + dy * dy);
-    return (distance < (obj1.size / 2 + obj2.size / 2));
-}
-
-function getRandomBetween(x, y) {
-    return Math.floor(Math.random() * y) + x;
 }
 
 function checkCollisions() {
-
-    // check enemy/bullet collisions
-    gameObjects.forEach(function(obj1) {
-        if (obj1.type == 'enemy') {
-            gameObjects.forEach(function(obj2) {
-                if (obj2.type == 'bullet') {
-                    if (areTouching(obj1, obj2)) {
-                        obj1.destroy = true;
-                        obj2.destroy = true;
-                        console.log('OMG DESTROYED');
-                        console.log(obj1);
-                        console.log(obj2);
-                    }
-                }
-            });
-        }
-    });
 
 }
 
@@ -317,31 +202,10 @@ function destroyAndCreate(timestamp) {
     var tick = Math.floor(timestamp / 1000);
     if (tick === nextEnemy) {
         nextEnemy += ENEMY_DELAY;
-        var m = makeEnemy();
-        gameObjects.push(m);
         console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
     }
 }
 
-function makeEnemy() {
-
-    var enemy = {
-        type: 'enemy',
-        speed: 4,
-        size: 300,
-        costume: enemyImage,
-        dir: {
-            y: 0,
-            x: 0
-        },
-        y: canvas.height * Math.random(),
-        x: canvas.width * Math.random()
-    };
-
-    return enemy;
-
-
-}
 
 function gameStep(timestamp) {
     doMovement();
