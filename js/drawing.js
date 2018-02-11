@@ -20,8 +20,9 @@ function drawBackground() {
 var motionEffects = {
 
     crazy: function(obj) {
-        obj.dir.y -= 0.5 - Math.random();
-        obj.size -= (0.5 - Math.random()) * 5;
+        obj.dir.y += randomBetween(-1,1);
+        obj.dir.x += randomBetween(-1,1);
+        obj.size  += randomBetween(-10,10);
     },
     goToEnemy: function(obj) {
 

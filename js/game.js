@@ -26,9 +26,9 @@ function initialState() {
         score: 0,
         background: images.background,
         settings: {
-            enemyDelay: 10,
+            enemyDelay: 2,
             bulletSpeed: 6,
-            playerSpeed: 4,
+            playerSpeed: 10,
         },
         entities: [],
         player: {
