@@ -22,13 +22,13 @@ var motionEffects = {
     crazy: function(obj) {
         obj.dir.y -= 0.5 - Math.random();
         obj.size -= (0.5 - Math.random()) * 5;
-      },
+    },
     goToEnemy: function(obj) {
 
-      var closestEnemy = findClosestOfType(obj, "enemy");
-      if (closestEnemy) {
-      pointToward(obj, closestEnemy);
-          }
+        var closestEnemy = findClosestOfType(obj, "enemy");
+        if (closestEnemy) {
+            pointToward(obj, closestEnemy);
+        }
     }
 
 }

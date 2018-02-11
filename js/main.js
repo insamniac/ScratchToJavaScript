@@ -360,20 +360,20 @@ function makeBat() {
     };
 
     return enemy;
-    
-function gameStep(timestamp) {
-    doMovement();
-    checkCollisions();
-    destroyAndCreate(timestamp);
-    doRendering();
-    if (!GAMEOVER) {
-        window.requestAnimationFrame(gameStep);
-    } else {
-        gameover();
+
+    function gameStep(timestamp) {
+        doMovement();
+        checkCollisions();
+        destroyAndCreate(timestamp);
+        doRendering();
+        if (!GAMEOVER) {
+            window.requestAnimationFrame(gameStep);
+        } else {
+            gameover();
+        }
     }
-}
 
 
 
-init();
-window.requestAnimationFrame(gameStep);
+    init();
+    window.requestAnimationFrame(gameStep);
