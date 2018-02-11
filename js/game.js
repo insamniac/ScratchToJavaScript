@@ -59,14 +59,14 @@ function initialState() {
 function pointToward(obj1, obj2, precision) {
     precision = precision || 1;
     if (obj1.pos.x > obj2.pos.x) {
-        obj1.dir.x = -1 * precision;
+        obj1.dir.x = -1;
     } else {
-        obj1.dir.x = 1 * precision;
+        obj1.dir.x = 1;
     }
     if (obj1.pos.y > obj2.pos.y) {
-        obj1.dir.y = -1 * precision;
+        obj1.dir.y = -1;
     } else {
-        obj1.dir.y = 1 * precision;
+        obj1.dir.y = 1;
     }
 }
 
@@ -94,7 +94,7 @@ function doMovement() {
     move(player);
     entities.forEach(function(obj) {
         if (obj.type == 'enemy') {
-            pointToward(obj, player, 0.8);
+            pointToward(obj, player);
         }
         move(obj);
     });

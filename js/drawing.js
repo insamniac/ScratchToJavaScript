@@ -17,9 +17,24 @@ function drawBackground() {
 }
 
 
+var motionEffects = {
+
+    crazy: function(obj) {
+        obj.dir.y -= 0.5 - Math.random();
+        obj.size -= (0.5 - Math.random()) * 5;
+      },
+    goToEnemy: function(obj) {
+
+      var closestEnemy = findClosestOfType(obj, "enemy");
+      if (closestEnemy) {
+      pointToward(obj, closestEnemy);
+          }
+    }
+
+}
 
 // this will draw an object on a canvas context. the object must have at least
-// these properties:  [costume, pos.x, pos.y, size] 
+// these properties:  [costume, pos.x, pos.y, size]
 
 function render(obj, ctx) {
     if (!obj.costume || !obj.costume.complete) {

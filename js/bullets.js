@@ -5,11 +5,9 @@ function makeBullet() {
         speed: 20,
         size: 15,
         costume: images.bullet,
-
         dir: {
             y: 0
         },
-
         pos: {
             y: state.player.pos.y + state.player.size / 2
         }
@@ -30,11 +28,6 @@ function makeCustomBullet(props) {
 }
 
 
-
-
-
-
-
 function shoot(bullet) {
     var player = state.player;
     if (player.costume == player.img.right) {
@@ -46,18 +39,9 @@ function shoot(bullet) {
         bullet.pos.x = player.pos.x;
 
     }
-
     state.entities.push(bullet);
 }
 
-var bulletEffects = {
-
-    crazy: function(obj) {
-        obj.dir.y -= 0.5 - Math.random();
-        obj.size -= (0.5 - Math.random()) * 5;
-
-    }
-}
 
 function shootNormal() {
     shoot(makeBullet());
@@ -67,7 +51,7 @@ function shootBig() {
     var props = {
         size: 60,
         costume: images.purpleBullet,
-        effects: [bulletEffects.crazy],
+        effects: [motionEffects.crazy],
         dir: {
             y: randomBetween(-1, 1)
         }
@@ -79,8 +63,8 @@ function shootBig() {
 function shootTiny() {
     var props = {
         size: 5,
-        speed: 30,
-        effects: [bulletEffects.crazy],
+        speed: 10,
+        effects: [motionEffects.crazy, motionEffects.goToEnemy],
         dir: {
             y: randomBetween(-1, 1)
         }
@@ -93,7 +77,7 @@ function shootIcy() {
     var props = {
         size: 80,
         custome: images.blueBullet,
-        effects: [bulletEffects.crazy],
+        effects: [motionEffects.crazy],
         dir: {
             y: randomBetween(-1, 1)
         }

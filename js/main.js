@@ -142,6 +142,7 @@ function makeBullet() {
 }
 
 function shoot() {
+    crazy = true
     gameObjects.push(makeBullet());
 }
 
@@ -343,6 +344,23 @@ function makeEnemy() {
 
 }
 
+function makeBat() {
+
+    var bat = {
+        type: 'bat',
+        speed: 2,
+        size: 200,
+        costume: batImage,
+        dir: {
+            y: 0,
+            x: 0
+        },
+        y: canvas.height * Math.random(),
+        x: canvas.width * Math.random()
+    };
+
+    return enemy;
+    
 function gameStep(timestamp) {
     doMovement();
     checkCollisions();
