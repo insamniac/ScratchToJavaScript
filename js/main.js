@@ -55,7 +55,7 @@
     };
 
     var GAMEOVER = false;
-    var ENEMY_DELAY = 10 ;
+    var ENEMY_DELAY = 2 ;
     var nextEnemy = 4;
     var gameObjects = [];
     var keyStates={};
@@ -242,8 +242,35 @@ function doMovement() {
         }
     });
 };
+function areTouching(obj1, obj2) {
+  var dx = obj1.x - obj2.x;
+  var dy = obj1.y - obj2.y;
+  var distance = Math.sqrt(dx * dx + dy * dy);
+  return (distance < (obj1.size / 2 + obj2.size / 2)) ;
+}
+
+function getRandomBetween(x,y) {
+  return Math.floor(Math.random() * y) + x;
+}
 
 function checkCollisions() {
+
+// check enemy/bullet collisions
+  gameObjects.forEach(function(obj1) {
+      if (obj1.type == "enemy") {
+        gameObjects.forEach(function(obj2) {
+          if (obj2.type == "bullet") {
+            if (areTouching(obj1, obj2)) {
+              obj1.destroy = true;
+              obj2.destroy = true;
+              console.log("OMG DESTROYED");
+              console.log(obj1);
+              console.log(obj2);
+            }
+          }
+        });
+      }
+  });
 
 }
 
