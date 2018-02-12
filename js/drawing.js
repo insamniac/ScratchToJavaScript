@@ -8,7 +8,10 @@ var images = {
     dragon: loadImage("dragon.png"),
     blackBat: loadImage("black-bat-1.svg"),
     brownBat: loadImage("brown-bat-1.svg"),
-    background: loadImage("background.png")
+    background: loadImage("background.png"),
+    powerup: loadImage("Powerup.svg"),
+    life: loadImage("Life.svg"),
+
 };
 
 
@@ -76,6 +79,18 @@ function loadImage(file) {
     return image;
 
 }
+// creating a function of loadImages, it's argument being the fileList- it defines imageList- which is empty, but then, for
+// each item in fileList we call loadImage and add the result to the imageList! Then it defines img as loadImage and it's
+// argumenmt is file- and then it pushes the image the the imageList.
+function loadImages(fileList){
+  var imageList = [];
+    fileList.forEach(function(file){
+        var img = loadImage(file);
+          imageList.push(img);
+    });
+      return imageList;
+}
+
 
 function addCostume(target, image, flip) {
 
