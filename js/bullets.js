@@ -40,6 +40,7 @@ function shoot(bullet) {
 
     }
     state.entities.push(bullet);
+    sounds.play(sounds.bullet);
 }
 
 
