@@ -31,6 +31,7 @@ function initialState() {
             playerSpeed: 10,
         },
         entities: [],
+        renders: [],
         player: {
             pos: {
                 x: canvas.width / 2,
@@ -107,12 +108,19 @@ function checkCollisions() {
         if (obj1.type == 'enemy') {
             state.entities.forEach(function(obj2) {
                 if (obj2.type == 'bullet') {
-                    if (areTouching(obj1, obj2)) {
+                    if (areTouching(obj1, obj2) && !obj1.destroy && !obj2.destroy) {
                         obj1.destroy = true;
                         obj2.destroy = true;
                     }
                 }
             });
+        }
+    });
+
+    // check if objects are outside game board and destroy
+    state.entities.map(function(obj) {
+        if (obj.pos.x < 0 || obj.pos.x > canvas.width || obj.pos.y < 0 || obj.pos.y > canvas.height) {
+            obj.destroy = true;
         }
     });
 
@@ -129,16 +137,15 @@ function doRendering() {
     state.entities.forEach(function(x) {
         render(x, context);
     });
+    while (state.renders.length > 0 ) {
+        var r = state.renders.shift();
+        r();
+    }
 }
 
 
 function destroyAndCreate(timestamp) {
 
-    state.entities.map(function(obj) {
-        if (obj.pos.x < 0 || obj.pos.x > canvas.width || obj.pos.y < 0 || obj.pos.y > canvas.height) {
-            obj.destroy = true;
-        }
-    });
 
     state.entities = state.entities.filter(function(obj) {
         return !obj.destroy
