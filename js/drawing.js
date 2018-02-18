@@ -11,6 +11,8 @@ var images = {
     background: loadImage("background.png"),
     powerup: loadImage("Powerup.svg"),
     life: loadImage("Life.svg"),
+    ghost: loadImage("Ghost.svg"),
+    ghoul: loadImage("Ghoul.svg"),
     gameover: loadImage("gameover.png")
 
 };
