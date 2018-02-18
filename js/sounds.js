@@ -4,18 +4,20 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var sounds = {
 	 context: new AudioContext(),
-	 bullet: loadSound("bullet.wav"),
-	 cave: loadSound("cave.wav"),
-	 gameover: loadSound("gameover.wav"),
-	 scream: loadSound("scream.wav"),
-
      play: playSound
-}
+};
+
+  loadSound('bullet', "bullet.wav");
+//TODO: fix this sound file.... or get different background music!
+//  loadSound('bg', "cave.wav");
+  loadSound('gameover', "gameover.wav");
+  loadSound('scream', "scream.wav");
+
 
 sounds.gainNode = sounds.context.createGain();
 sounds.gainNode.gain.value=0.1;
 
-function loadSound(fileName, soundName) {
+function loadSound(soundName, fileName) {
 	soundName == soundName || fileName;
 	var request = new XMLHttpRequest();
 	  request.open('GET', "audio/"+fileName, true);

@@ -11,6 +11,7 @@ var images = {
     background: loadImage("background.png"),
     powerup: loadImage("Powerup.svg"),
     life: loadImage("Life.svg"),
+    gameover: loadImage("gameover.png")
 
 };
 
@@ -55,7 +56,7 @@ function render(obj, ctx) {
     var size = obj.size;
     var radius = size / 2;
     ctx.translate(x + radius, y + radius);
-    ctx.drawImage(obj.costume, -radius, -radius, size, size);
+    ctx.drawImage(obj.costume, -size, -size, size, size);
     ctx.translate(-x - radius, -y - radius);
 }
 

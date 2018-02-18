@@ -1,4 +1,13 @@
 function handleKeyEvent(e) {
+    if (state.INPUT_DISABLED) {
+        return;
+    }
+
+    if (state.gameOver) {
+        state = resetState();
+    }
+
+
     var keydown = e.type === 'keydown';
     //    console.log(e.key +": "+e.type);
     //    console.log(e);

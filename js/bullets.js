@@ -9,7 +9,7 @@ function makeBullet() {
             y: 0
         },
         pos: {
-            y: state.player.pos.y + state.player.size / 2
+            y: state.player.pos.y 
         }
     };
 
@@ -40,7 +40,7 @@ function shoot(bullet) {
 
     }
     state.entities.push(bullet);
-    sounds.play(sounds.bullet);
+    sounds.play('bullet');
 }
 
 

@@ -4,17 +4,18 @@ function randomBetween(x, y) {
     return Math.floor(Math.random() * (y - x + 1) + x);
 }
 
-function areTouching(obj1, obj2) {
+function areTouching(obj1, obj2, buffer) {
+    buffer = buffer || 10;
     var distance = getDistance(obj1, obj2);
-    return (distance < (obj1.size / 2 + obj2.size / 2));
+    return (distance  < (obj1.size / 2 + obj2.size / 2) - buffer);
 }
 
 function getDistance(obj1, obj2) {
     // this seems odd, but we want to make sure we're getting the distance from the center of the object
-    var x1 = obj1.pos.x + obj1.size / 2;
-    var y1 = obj1.pos.y + obj1.size / 2;
-    var x2 = obj2.pos.x + obj1.size / 2;
-    var y2 = obj2.pos.y + obj1.size / 2;
+    var x1 = obj1.pos.x ;
+    var y1 = obj1.pos.y ;
+    var x2 = obj2.pos.x ;// + obj1.size / 2;
+    var y2 = obj2.pos.y ;//+ obj1.size / 2;
     var dx = x1 - x2;
     var dy = y1 - y2;
     
