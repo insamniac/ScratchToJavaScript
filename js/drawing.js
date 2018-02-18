@@ -26,6 +26,9 @@ var motionEffects = {
         obj.dir.y += randomBetween(-1,1);
         obj.dir.x += randomBetween(-1,1);
         obj.size  += randomBetween(-10,10);
+        if (obj.size < 40) {
+            obj.size = 40;
+        }
     },
     goToEnemy: function(obj) {
 
