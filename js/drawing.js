@@ -53,11 +53,11 @@ function render(obj, ctx) {
     }
     var x = obj.pos.x;
     var y = obj.pos.y;
-    var size = obj.size;
-    var radius = size / 2;
-    ctx.translate(x + radius, y + radius);
-    ctx.drawImage(obj.costume, -size, -size, size, size);
-    ctx.translate(-x - radius, -y - radius);
+    var w = obj.width || obj.size;
+    var h = obj.height || obj.size;
+    ctx.translate(x + w/2, y + h/2);
+    ctx.drawImage(obj.costume, -w, -h, w, h);
+    ctx.translate(-x - w/2, -y - h/2);
 }
 
 // this takes an image and flips it along the y-axis and returns it as a new image.

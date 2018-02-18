@@ -31,11 +31,11 @@ function makeCustomBullet(props) {
 function shoot(bullet) {
     if (player.costume == player.img.right) {
         bullet.dir.x = 1;
-        bullet.pos.x = player.pos.x + player.size;
+        bullet.pos.x = player.pos.x + player.size / 2;
 
     } else {
         bullet.dir.x = -1;
-        bullet.pos.x = player.pos.x;
+        bullet.pos.x = player.pos.x - player.size / 2;
 
     }
     entities.push(bullet);

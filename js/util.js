@@ -1,4 +1,4 @@
-DEBUG=true
+DEBUG=false;
 
 function randomBetween(x, y) {
     return Math.floor(Math.random() * (y - x + 1) + x);
@@ -11,11 +11,10 @@ function areTouching(obj1, obj2, buffer) {
 }
 
 function getDistance(obj1, obj2) {
-    // this seems odd, but we want to make sure we're getting the distance from the center of the object
     var x1 = obj1.pos.x ;
     var y1 = obj1.pos.y ;
-    var x2 = obj2.pos.x ;// + obj1.size / 2;
-    var y2 = obj2.pos.y ;//+ obj1.size / 2;
+    var x2 = obj2.pos.x ;
+    var y2 = obj2.pos.y ;
     var dx = x1 - x2;
     var dy = y1 - y2;
     
@@ -47,8 +46,4 @@ function findClosestOfType(obj1, type) {
     return objectMap[smallestDistance];
 
 }
-// Code taken from stackoverflow.com
-// https://stackoverflow.com/questions/22235360/how-to-efficiently-calculate-nearest-2d-points-in-javascript
-function distanceBetweenPoints(p1, p2) {
-    return Math.abs(Math.sqrt((p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1])));
-}
+

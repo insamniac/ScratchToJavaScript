@@ -183,15 +183,16 @@ function gameStep(timestamp) {
 
 function gameover() {
     GAMEOVER=true;
-    INPUT_DISABLED=true;
+    PAUSED=true;
     setTimeout(function() { 
-        INPUT_DISABLED=false;
+        PAUSED=false;
     }, 1000);
     sounds.play('scream');
     var gOver=  { type: 'gameover',
                   pos: { x: canvas.width / 2,
                          y: canvas.height / 2},
-                  size: 500,
+                  height: 500,
+                  width: 800,
                   costume: images.gameover};
 //    render(gOver, context);
     entities=[gOver];

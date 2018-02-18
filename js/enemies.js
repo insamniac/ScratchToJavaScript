@@ -1,10 +1,9 @@
 function makeEnemy() {
-//var enemyFunctionsList = [makeDragon, makeCrazyBat, makeBlackBat, makeBrownBat];
-  var enemyFunctionsList = [makeDragon, makeCrazyBat];
+  var enemyFunctionsList = [makeDragon, makeCrazyBat, makeBlackBat, makeBrownBat];
 
-  var choiceNumber = randomBetween(0, enemyFunctionsList.length - 1);
+  var randomNumber = randomBetween(0, enemyFunctionsList.length - 1);
 
-  var chosenFunction = enemyFunctionsList[choiceNumber];
+  var chosenFunction = enemyFunctionsList[randomNumber];
 
   return chosenFunction();
 }
