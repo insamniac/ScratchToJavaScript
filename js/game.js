@@ -31,12 +31,12 @@ function initialState() {
                 y: canvas.height / 2
             },
             size: 100,
-            speed: 8,
+            speed: 10,
             dir: {
                 x: 0,
                 y: 0
             }
-        };
+        }; 
 
 
     addCostume(player, images.witch, true);
@@ -161,7 +161,7 @@ function destroyAndCreate(timestamp) {
     entities = entities.filter(function(obj) {
         return !obj.destroy
     });
-    
+
     var tick = Math.floor(timestamp / 1000);
     if (tick >= nextEnemy) {
         nextEnemy = tick+ enemyDelay;
@@ -184,7 +184,7 @@ function gameStep(timestamp) {
 function gameover() {
     GAMEOVER=true;
     PAUSED=true;
-    setTimeout(function() { 
+    setTimeout(function() {
         PAUSED=false;
     }, 1000);
     sounds.play('scream');
@@ -196,11 +196,10 @@ function gameover() {
                   costume: images.gameover};
 //    render(gOver, context);
     entities=[gOver];
-    
+
 }
 
 
 
 initialize();
 window.requestAnimationFrame(gameStep);
-
