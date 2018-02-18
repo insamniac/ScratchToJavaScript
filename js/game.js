@@ -26,9 +26,8 @@ function initialState() {
         score: 0,
         background: images.background,
         settings: {
-            enemyDelay: 2,
-            bulletSpeed: 6,
-            playerSpeed: 10,
+            enemyDelay: 4,
+            bulletSpeed: 6
         },
         entities: [],
         renders: [],
@@ -38,7 +37,7 @@ function initialState() {
                 y: canvas.height / 2
             },
             size: 100,
-            speed: 4,
+            speed: 8,
             dir: {
                 x: 0,
                 y: 0
