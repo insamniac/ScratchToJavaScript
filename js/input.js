@@ -1,10 +1,10 @@
 function handleKeyEvent(e) {
-    if (state.INPUT_DISABLED) {
+    if (PAUSED) {
         return;
     }
 
-    if (state.gameOver) {
-        state = resetState();
+    if (GAMEOVER) {
+        resetState();
     }
 
 
@@ -15,33 +15,33 @@ function handleKeyEvent(e) {
         case 'w':
         case 'ArrowUp':
             if (keydown) {
-                state.player.dir.y = -1;
+                player.dir.y = -1;
             } else {
-                state.player.dir.y = 0;
+                player.dir.y = 0;
             }
             break;
         case 'a':
         case 'ArrowLeft':
             if (keydown) {
-                state.player.dir.x = -1;
+                player.dir.x = -1;
             } else {
-                state.player.dir.x = 0;
+                player.dir.x = 0;
             }
             break;
         case 's':
         case 'ArrowDown':
             if (keydown) {
-                state.player.dir.y = 1;
+                player.dir.y = 1;
             } else {
-                state.player.dir.y = 0;
+                player.dir.y = 0;
             }
             break;
         case 'd':
         case 'ArrowRight':
             if (keydown) {
-                state.player.dir.x = 1;
+                player.dir.x = 1;
             } else {
-                state.player.dir.x = 0;
+                player.dir.x = 0;
             }
             break;
         case ' ':

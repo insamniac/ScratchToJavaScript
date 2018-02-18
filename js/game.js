@@ -6,6 +6,8 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 
+
+
 function initialState() {
 
 
@@ -15,22 +17,15 @@ function initialState() {
 
 
 
-    var state = {
-        canvas: canvas,
-        context: context,
-        gameOver: false,
-        paused: false,
-        nextEnemy: 4,
-        INPUT_DISABLED: false, 
-        score: 0,
-        background: images.background,
-        settings: {
-            enemyDelay: 4,
-            bulletSpeed: 6
-        },
-        entities: [],
-        renders: [],
-        player: {
+        GAMEOVER = false;
+        PAUSED = false;
+        nextEnemy= 4;
+        score =  0;
+        background= images.background;
+        enemyDelay= 4;
+        entities= [];
+        renders = [];
+        player= {
             pos: {
                 x: canvas.width / 2,
                 y: canvas.height / 2
@@ -41,37 +36,31 @@ function initialState() {
                 x: 0,
                 y: 0
             }
-        }
-    };
+        };
 
 
-
-
-    addCostume(state.player, images.witch, true);
-    return state;
+    addCostume(player, images.witch, true);
 }
 
 
 function resetState() {
 
-        state.gameOver = false;
-        state.nextEnemy = 4;
-        state.player.pos.x = canvas.width / 2;
-        state.player.pos.y = canvas.height / 2;
-        state.player.dir = {x:0, y:0};
-        state.entities=[];
-    return state;
+        GAMEOVER= false;
+        nextEnemy = 4;
+        player.pos.x = canvas.width / 2;
+        player.pos.y = canvas.height / 2;
+        player.dir = {x:0, y:0};
+        entities=[];
 }
 
 
 
 function initialize() {
 
-    state = initialState();
+    initialState();
     window.addEventListener('resize', resizeCanvas, false);
     window.addEventListener('keydown', handleKeyEvent, false);
     window.addEventListener('keyup', handleKeyEvent, false);
-    return state;
 
 }
 
@@ -103,9 +92,6 @@ function move(obj) {
 }
 
 function doMovement() {
-    var player = state.player;
-    var entities = state.entities;
-
     if (player.dir.x > 0) {
         player.costume = player.img.right;
     } else if (player.dir.x < 0) {
@@ -124,9 +110,9 @@ function doMovement() {
 function checkCollisions() {
 
     // check enemy/bullet collisions
-    state.entities.forEach(function(obj1) {
+    entities.forEach(function(obj1) {
         if (obj1.type == 'enemy') {
-            state.entities.forEach(function(obj2) {
+            entities.forEach(function(obj2) {
                 if (obj2.type == 'bullet') {
                     if (areTouching(obj1, obj2) && !obj1.destroy && !obj2.destroy) {
                         obj1.destroy = true;
@@ -138,7 +124,7 @@ function checkCollisions() {
     });
 
     // check if objects are outside game board and destroy
-    state.entities.forEach(function(obj) {
+    entities.forEach(function(obj) {
         if (obj.pos.x < 0 || obj.pos.x > canvas.width || obj.pos.y < 0 || obj.pos.y > canvas.height) {
             obj.destroy = true;
         }
@@ -146,9 +132,9 @@ function checkCollisions() {
 
 
     // check if enemy is touching witch and game over.
-    state.entities.forEach(function(obj) {
+    entities.forEach(function(obj) {
         if (obj.type == 'enemy') {
-            if (areTouching(obj,state.player)) {
+            if (areTouching(obj,player)) {
                 gameover();
             }
         }
@@ -159,12 +145,12 @@ function checkCollisions() {
 
 function doRendering() {
     drawBackground();
-    render(state.player, context);
-    state.entities.forEach(function(x) {
+    render(player, context);
+    entities.forEach(function(x) {
         render(x, context);
     });
-    while (state.renders.length > 0 ) {
-        var r = state.renders.shift();
+    while (renders.length > 0 ) {
+        var r = renders.shift();
         r();
     }
 }
@@ -172,17 +158,17 @@ function doRendering() {
 function destroyAndCreate(timestamp) {
 
 
-    state.entities = state.entities.filter(function(obj) {
+    entities = entities.filter(function(obj) {
         return !obj.destroy
     });
     
     var tick = Math.floor(timestamp / 1000);
-    if (tick >= state.nextEnemy) {
-        state.nextEnemy = tick+ state.settings.enemyDelay;
+    if (tick >= nextEnemy) {
+        nextEnemy = tick+ enemyDelay;
         var m = makeEnemy();
-        if (!state.gameOver) {
-            state.entities.push(m);
-            console.log('New Enemy Created at: ' + tick + '.  Next At: ' + state.nextEnemy);
+        if (!GAMEOVER) {
+            entities.push(m);
+            console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
         }
     }
 }
@@ -196,10 +182,10 @@ function gameStep(timestamp) {
 }
 
 function gameover() {
-    state.gameOver=true;
-    state.INPUT_DISABLED=true;
+    GAMEOVER=true;
+    INPUT_DISABLED=true;
     setTimeout(function() { 
-        state.INPUT_DISABLED=false;
+        INPUT_DISABLED=false;
     }, 1000);
     sounds.play('scream');
     var gOver=  { type: 'gameover',
@@ -208,12 +194,12 @@ function gameover() {
                   size: 500,
                   costume: images.gameover};
 //    render(gOver, context);
-    state.entities=[gOver];
+    entities=[gOver];
     
 }
 
 
 
-var state = initialize();
+initialize();
 window.requestAnimationFrame(gameStep);
 

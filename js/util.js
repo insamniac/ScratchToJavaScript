@@ -20,8 +20,8 @@ function getDistance(obj1, obj2) {
     var dy = y1 - y2;
     
     if (DEBUG) {
-         var ctx= state.context;
-        state.renders.push(function() {
+         var ctx= context;
+         renders.push(function() {
          ctx.strokeStyle = 'rgb('+randomBetween(0,255)+',' + 
                                  randomBetween(1,255) + ',' + 
                                  randomBetween(1,255) + ')';
@@ -37,7 +37,7 @@ function getDistance(obj1, obj2) {
 
 function findClosestOfType(obj1, type) {
     var objectMap = {};
-    state.entities.forEach(function(obj2) {
+    entities.forEach(function(obj2) {
         if (obj2.type == type) {
             var distance = getDistance(obj1, obj2);
             objectMap[distance] = obj2;

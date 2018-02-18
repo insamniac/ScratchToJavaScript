@@ -9,7 +9,7 @@ function makeBullet() {
             y: 0
         },
         pos: {
-            y: state.player.pos.y 
+            y: player.pos.y 
         }
     };
 
@@ -29,7 +29,6 @@ function makeCustomBullet(props) {
 
 
 function shoot(bullet) {
-    var player = state.player;
     if (player.costume == player.img.right) {
         bullet.dir.x = 1;
         bullet.pos.x = player.pos.x + player.size;
@@ -39,7 +38,7 @@ function shoot(bullet) {
         bullet.pos.x = player.pos.x;
 
     }
-    state.entities.push(bullet);
+    entities.push(bullet);
     sounds.play('bullet');
 }
 
