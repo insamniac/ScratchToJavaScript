@@ -7,7 +7,7 @@ var sounds = {
 	 bullet: loadSound("bullet.wav"),
 	 cave: loadSound("cave.wav"),
 	 gameover: loadSound("gameover.wav"),
-	 scream: loadSound("scream.wav")
+	 scream: loadSound("scream.wav"),
 
      play: playSound
 }
