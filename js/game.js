@@ -6,8 +6,6 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 
-
-
 function initialState() {
 
 
@@ -81,7 +79,6 @@ function move(obj) {
     obj.pos.y += obj.speed * obj.dir.y;
 }
 
-
 function doMovement() {
     var player = state.player;
     var entities = state.entities;
@@ -126,11 +123,6 @@ function checkCollisions() {
 
 }
 
-
-
-
-
-
 function doRendering() {
     drawBackground();
     render(state.player, context);
@@ -142,7 +134,6 @@ function doRendering() {
         r();
     }
 }
-
 
 function destroyAndCreate(timestamp) {
 
@@ -159,8 +150,6 @@ function destroyAndCreate(timestamp) {
     }
 }
 
-
-
 function gameStep(timestamp) {
     doMovement();
     checkCollisions();
@@ -173,12 +162,10 @@ function gameStep(timestamp) {
     }
 }
 
-
 function gameover() {
     state.gameOver = true;
 
 }
-
 
 var state = initialState();
 window.requestAnimationFrame(gameStep);

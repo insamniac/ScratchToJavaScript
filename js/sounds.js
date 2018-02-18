@@ -5,6 +5,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var sounds = {
 	 context: new AudioContext(),
 	 bullet: loadSound("bullet.wav"),
+	 cave: loadSound("cave.wav"),
+	 gameover: loadSound("gameover.wav"),
+	 scream: loadSound("scream.wav")
+
      play: playSound
 }
 
@@ -34,5 +38,3 @@ function playSound(name) {
 	sounds.gainNode.connect(sounds.context.destination);
 	source.start(0);
 }
-
-
