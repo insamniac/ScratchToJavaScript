@@ -235,7 +235,12 @@ function checkLevelUp() {
   if (player.score == 15 && player.level == 1) {
     player.level = 2;
     ENEMY_DELAY -= 1;
+      sounds.setVolume(0.5);
+      sounds.play('level-up');
+      setTimeout(function() {
+          sounds.setVolume(0.1);
       changeBackgroundMusic('car-theft');
+      },1500);
   }
   if (player.score == 40 && player.level == 2) {
     player.level = 3;
@@ -312,3 +317,16 @@ function gameover() {
 
 initialize();
 window.requestAnimationFrame(gameStep);
+
+                                                                        
+document.getElementById('pause-control').addEventListener('click', function(e) {
+//    console.log(e);
+    if (e.target.classList.contains('paused')) {
+        PAUSED=false;
+        e.target.classList.remove("paused");
+    } else {
+        PAUSED=true;
+        e.target.classList.add("paused");
+    }
+    document.activeElement.blur();
+});

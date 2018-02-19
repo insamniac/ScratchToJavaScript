@@ -24,14 +24,15 @@ function drawBackground() {
 }
 
 function drawScoreLevelAndLives() {
+    context.font="20px Arial";
        context.fillStyle = '#f50';
-    context.fillRect(5,50,80, 60);
+    context.fillRect(1,1, 600, 30);
        context.fillStyle = '#000';
-    context.fillText('Score: '+player.score, 10, 60);
-    context.fillText('Level: '+player.level, 10, 75);
-    context.fillText('Lives: '+player.lives, 10, 90);
+    context.fillText('Score: '+player.score, 90, 20);
+    context.fillText('Level: '+player.level, 200, 20);
+    context.fillText('Lives: '+player.lives, 310, 20);
        context.fillStyle = '#00D';
-    context.fillText('Bullets: '+player.bullets, 10, 105);
+    context.fillText('Bullets: '+player.bullets, 420, 20);
 }
 
 var motionEffects = {

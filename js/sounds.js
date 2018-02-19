@@ -14,6 +14,7 @@ var sounds = {
   loadSound('scream', "ahhh.wav");
   loadSound('ugh', "ugh.wav");
   loadSound('yay', "yay.wav");
+  loadSound('level-up', "level-up.mp3");
 
 
 sounds.gainNode = sounds.context.createGain();
@@ -27,6 +28,9 @@ sounds.unmute = function() {
     sounds.gainNode.gain.value=0.1;
 }
 
+sounds.setVolume = function(v) {
+    sounds.gainNode.gain.value=v;
+}
 
 function loadSound(soundName, fileName) {
 	soundName == soundName || fileName;
