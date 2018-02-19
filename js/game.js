@@ -232,9 +232,10 @@ function destroyAndCreate(timestamp) {
     }
 }
 function checkLevelUp() {
-  if (player.score == 25 && player.level == 1) {
+  if (player.score == 15 && player.level == 1) {
     player.level = 2;
     ENEMY_DELAY -= 1;
+      changeBackgroundMusic('car-theft');
   }
   if (player.score == 40 && player.level == 2) {
     player.level = 3;

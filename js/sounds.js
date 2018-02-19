@@ -8,8 +8,8 @@ var sounds = {
 };
 
   loadSound('bullet', "bullet.wav");
-//TODO: fix this sound file.... or get different background music!
-  loadSound('bg', "background-music.mp3");
+  loadSound('bg-default', "background-music.mp3");
+  loadSound('car-theft', "car-theft.mp3");
   loadSound('gameover', "gameover.wav");
   loadSound('scream', "ahhh.wav");
   loadSound('ugh', "ugh.wav");
@@ -54,11 +54,20 @@ function playSound(name, repeat) {
 	source.connect(sounds.gainNode);
 	sounds.gainNode.connect(sounds.context.destination);
 	source.start(0);
+    return source;
+}
+
+BG_SOURCE=null;
+function changeBackgroundMusic(name) {
+    if (BG_SOURCE) {
+        BG_SOURCE.stop();
+    }
+    BG_SOURCE=playSound(name,true);
 }
 
 
 setTimeout(function() {
-    playSound('bg', true);
+    changeBackgroundMusic('bg-default');
 },3000);
 
 
