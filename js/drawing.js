@@ -18,9 +18,13 @@ var images = {
 
 };
 
-
+BG_TINT='black'
 function drawBackground() {
     context.drawImage(images.background, 0, 0, canvas.width, canvas.height);
+    context.fillStyle=BG_TINT;
+    context.globalAlpha=0.3;
+    context.fillRect(0,0,canvas.width,canvas.height);
+    context.globalAlpha=1;
 }
 
 function drawScoreLevelAndLives() {

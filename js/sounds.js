@@ -18,7 +18,7 @@ var sounds = {
 
 
 sounds.gainNode = sounds.context.createGain();
-sounds.gainNode.gain.value=0.0;
+sounds.gainNode.gain.value=0.1;
 
 sounds.mute = function() {
     sounds.gainNode.gain.value=0;
@@ -29,7 +29,7 @@ sounds.unmute = function() {
 }
 
 sounds.setVolume = function(v) {
-    sounds.gainNode.gain.value=v;
+    sounds.gain.node.gain.value=v;
 }
 
 function loadSound(soundName, fileName) {

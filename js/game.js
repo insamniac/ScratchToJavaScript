@@ -231,22 +231,31 @@ function destroyAndCreate(timestamp) {
         console.log('New Life Created at: ' + tick + '.  Next At: ' + nextLife);
     }
 }
+
+function levelUp() {
+    player.level+=1;
+    BG_SOURCE.stop();
+    sounds.play('level-up');
+}
+
 function checkLevelUp() {
-  if (player.score == 15 && player.level == 1) {
-    player.level = 2;
+  if (player.score == 5 && player.level == 1) {
+    levelUp();
+    BG_TINT='blue';
     ENEMY_DELAY -= 1;
-      sounds.setVolume(0.5);
-      sounds.play('level-up');
-      setTimeout(function() {
-          sounds.setVolume(0.1);
-      changeBackgroundMusic('car-theft');
-      },1500);
+    setTimeout(function(){
+        changeBackgroundMusic('car-theft');
+    },1500);
   }
   if (player.score == 40 && player.level == 2) {
-    player.level = 3;
+    levelUp();
+    BG_TINT='red';
     player.size += 50;
     BULLET_SPEED += 20;
     ENEMY_DELAY -= 1;
+    setTimeout(function(){
+        changeBackgroundMusic('car-theft');
+    },1500);
   }
   if (player.score == 60 && player.level == 3) {
     player.level = 4;
