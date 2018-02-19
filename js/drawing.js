@@ -5,6 +5,7 @@ var images = {
     bullet: loadImage("bullet.svg"),
     purpleBullet: loadImage("purplestickyball.png"),
     blueBullet: loadImage("fireworkfreezingiceball.png"),
+    fireBullet: loadImage("fireball.svg"),
     dragon: loadImage("dragon.png"),
     blackBat: loadImage("black-bat-1.svg"),
     brownBat: loadImage("brown-bat-1.svg"),
@@ -85,6 +86,7 @@ function loadImage(file) {
     return image;
 
 }
+
 // creating a function of loadImages, it's argument being the fileList- it defines imageList- which is empty, but then, for
 // each item in fileList we call loadImage and add the result to the imageList! Then it defines img as loadImage and it's
 // argumenmt is file- and then it pushes the image the the imageList.
@@ -122,3 +124,31 @@ function addCostume(target, image, flip) {
         target.costume = image;
     }
 }
+
+
+function explode(obj) {
+
+    var count = 100;
+    if (obj.size > 200) {
+        count = obj.size / 2;
+    }
+    var fireballs=[];
+    for (var i=0; i<obj.size ; i++) {
+        var ball = {
+                     costume: images.fireBullet,
+                     size: randomBetween(1,4),
+                     speed: randomBetween(10,15),
+                     pos: Object.assign({}, obj.pos),
+                     dir: { y:  Math.random() * -1 + Math.random(),
+                            x:  Math.random() * -1 + Math.random() }
+                
+        };
+        fireballs.push(ball);
+        entities.push(ball);
+    };
+    setTimeout(function(){ 
+        fireballs.forEach(function(f) {f.destroy=true});
+    }, 1000);
+
+}
+
