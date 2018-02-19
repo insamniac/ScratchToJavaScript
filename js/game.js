@@ -184,39 +184,39 @@ function destroyAndCreate(timestamp) {
     if (tick >= nextEnemy) {
         nextEnemy = tick+ enemyDelay;
         var m = makeEnemy();
-        if (!GAMEOVER) {
-            entities.push(m);
-            console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
-        }
+        entities.push(m);
+        console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
     }
     if (tick >= nextPowerup) {
         nextPowerup = tick+ powerupDelay;
         var p = makePowerup();
-        if (!GAMEOVER) {
-            entities.push(p);
-            console.log('New powerup Created at: ' + tick + '.  Next At: ' + nextPowerup);
-        }
+        entities.push(p);
+        console.log('New powerup Created at: ' + tick + '.  Next At: ' + nextPowerup);
     }
 }
 
 
 function gameStep(timestamp) {
-    doMovement();
-    checkCollisions();
+    if (!PAUSED && !GAMEOVER) {
+        doMovement();
+        checkCollisions();
+        destroyAndCreate(timestamp);
+    }
     doRendering();
-    destroyAndCreate(timestamp);
     window.requestAnimationFrame(gameStep);
 }
 
+
 function loseALife() {
-  player.size = 0
+  player.size = 0;
   sounds.play("scream");
   player.lives = player.lives - 1 ;
+  explode(player);
   if (player.lives > 0) {
     PAUSED=true;
     setTimeout(function() {
         PAUSED=false;
-        player.size = 100
+        player.size = 100;
     }, 2000);
 
   } else {
