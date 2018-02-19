@@ -276,7 +276,6 @@ function gameStep(timestamp) {
 
 
 function loseALife() {
-  player.size = 0;
   sounds.play("scream");
   player.lives = player.lives - 1 ;
   explode(player);
@@ -288,7 +287,6 @@ function loseALife() {
     PAUSED=true;
     setTimeout(function() {
         PAUSED=false;
-        player.size = 100;
     }, 2000);
   } else {
       gameover();
