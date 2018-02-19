@@ -122,15 +122,17 @@ function checkCollisions() {
 
     // check enemy/bullet collisions
     entities.forEach(function(obj1) {
-        if (obj1.type == 'enemy') {
+        if (obj1.type == 'enemy' || obj1.type == 'powerup') {
             entities.forEach(function(obj2) {
                 if (obj2.type == 'bullet') {
                     if (areTouching(obj1, obj2) && !obj1.destroy && !obj2.destroy) {
                         obj1.destroy = true;
                         obj2.destroy = true;
                         explode(obj2);
-                        sounds.play(obj1.sound);
-                      player.score = player.score + 1 ;
+                        if (obj1.type == 'enemy') {
+                            sounds.play(obj1.sound);
+                            player.score = player.score + 1 ;
+                        }
                     }
                 }
             });
@@ -174,7 +176,7 @@ function checkCollisions() {
         }   else if (obj.type == 'life' && areTouching(obj, player))  {
             sounds.play('yay');
             player.lives += 1;
-            explode(obj, images.purpleBullet, 15);
+            explode(obj);
             obj.destroy = true;
           }
     });

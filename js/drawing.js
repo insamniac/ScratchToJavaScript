@@ -150,8 +150,8 @@ function explode(obj, sprite) {
                      size: randomBetween(2,4),
                      speed: speed,
                      pos: Object.assign({}, obj.pos),
-                     dir: { y: (obj.dir.y || 1) * ( Math.random() * -1 + Math.random()),
-                            x:  (obj.dir.x || 1) * (Math.random() * -1 + Math.random()) }
+                     dir: { y: obj.dir.y +  ( Math.random() * -1 + Math.random()),
+                            x: obj.dir.x  +  (Math.random() * -1 + Math.random()) }
                 
         };
         fireballs.push(ball);
@@ -159,7 +159,7 @@ function explode(obj, sprite) {
     };
     setTimeout(function(){ 
         fireballs.forEach(function(f) {f.destroy=true});
-    }, 1000);
+    }, 1000 );
 
 }
 
