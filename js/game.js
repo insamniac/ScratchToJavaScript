@@ -120,7 +120,7 @@ function checkCollisions() {
                     if (areTouching(obj1, obj2) && !obj1.destroy && !obj2.destroy) {
                         obj1.destroy = true;
                         obj2.destroy = true;
-                        explode(obj1);
+                        explode(obj2);
                         sounds.play(obj1.sound);
                     }
                 }
@@ -139,10 +139,10 @@ function checkCollisions() {
 
     // check if enemy is touching witch and game over.
     entities.forEach(function(obj) {
-        if (obj.type == 'enemy' || obj.type == 'bullet') {
-            if (areTouching(obj,player)) {
-                gameover();
-            }
+        if (obj.type == 'enemy' && areTouching(obj,player)) {
+            gameover();
+        } else if (obj.type == 'bullet' && areTouching(obj, player))  {
+            sounds.play('scream');
         }
     });
 

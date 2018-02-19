@@ -126,21 +126,22 @@ function addCostume(target, image, flip) {
 }
 
 
-function explode(obj) {
+function explode(obj, sprite) {
+    sprite = sprite || obj.costume;
 
-    var count = 100;
+    var count = 200;
     if (obj.size > 200) {
-        count = obj.size / 2;
+        count = obj.size;
     }
     var fireballs=[];
-    for (var i=0; i<obj.size ; i++) {
+    for (var i=0; i<count ; i++) {
         var ball = {
-                     costume: images.fireBullet,
-                     size: randomBetween(1,4),
-                     speed: randomBetween(10,15),
+                     costume: sprite,
+                     size: randomBetween(2,4),
+                     speed: randomBetween(13,20),
                      pos: Object.assign({}, obj.pos),
-                     dir: { y:  Math.random() * -1 + Math.random(),
-                            x:  Math.random() * -1 + Math.random() }
+                     dir: { y: (obj.dir.y || 1) * ( Math.random() * -1 + Math.random()),
+                            x:  (obj.dir.x || 1) * (Math.random() * -1 + Math.random()) }
                 
         };
         fireballs.push(ball);
@@ -151,4 +152,5 @@ function explode(obj) {
     }, 1000);
 
 }
+
 
