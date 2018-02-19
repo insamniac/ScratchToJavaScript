@@ -24,6 +24,8 @@ function initialState() {
         BULLET_SIZE=10;
         ENEMY_DELAY= 4;
         POWERUP_DELAY= 1;
+        LIFE_DELAY= 20;
+        nextLife= 5;
         nextEnemy= 4;
         nextPowerup= 2;
         background= images.background;
@@ -54,6 +56,7 @@ function initialState() {
 function resetState() {
 
         GAMEOVER= false;
+        BULLET_SIZE=10;
         nextEnemy = 4;
         player.pos.x = canvas.width / 2;
         player.pos.y = canvas.height / 2;
@@ -168,7 +171,12 @@ function checkCollisions() {
             player.speed+=0.2;
             explode(obj, images.blueBullet, 15);
             obj.destroy = true;
-        }
+        }   else if (obj.type == 'life' && areTouching(obj, player))  {
+            sounds.play('yay');
+            player.lives += 1;
+            explode(obj, images.purpleBullet, 15);
+            obj.destroy = true;
+          }
     });
 
 
@@ -212,6 +220,12 @@ function destroyAndCreate(timestamp) {
         var p = makePowerup();
         entities.push(p);
         console.log('New powerup Created at: ' + tick + '.  Next At: ' + nextPowerup);
+    }
+    if (tick >= nextLife) {
+        nextLife = tick+ LIFE_DELAY;
+        var p = makeLife();
+        entities.push(p);
+        console.log('New Life Created at: ' + tick + '.  Next At: ' + nextLife);
     }
 }
 

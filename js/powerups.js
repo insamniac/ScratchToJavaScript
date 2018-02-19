@@ -18,7 +18,26 @@ function makePowerup() {
 
   return newPowerup;
 }
+function makeLife() {
 
+ var lifeFunctionsList = [makeLifeStar];
+ var newLife = null;
+ while (newLife == null) {
+
+     var randomNumber = randomBetween(0, lifeFunctionsList.length - 1);
+     var chosenFunction = lifeFunctionsList[randomNumber];
+     newLife = chosenFunction();
+      setPowerupDefaults(newLife);
+
+     var distanceToWitch = getDistance(newLife, player);
+      if (distanceToWitch < 801){
+        newLife = null;
+        console.log("The life was too close to exist in this 2D world.. DIE YOU BLASTED WORM DROPPINGS!");
+      }
+ }
+
+  return newLife;
+}
 function setPowerupDefaults(powerup) {
   powerup.dir = { y: 0, x: 0 };
   powerup.pos = { y: canvas.height * Math.random(),
@@ -34,4 +53,13 @@ function makeLifeHippo() {
         costume: images.life
     };
     return lifeHippo;
+}
+function makeLifeStar() {
+    var lifeStar = {
+        type: 'life',
+        speed: 9,
+        size: 40,
+        costume: images.powerup
+    };
+    return lifeStar;
 }
