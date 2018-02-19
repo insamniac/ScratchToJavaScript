@@ -22,7 +22,8 @@ function initialState() {
         GAMEOVER = false;
         PAUSED = false;
         BULLET_SIZE=10;
-        ENEMY_DELAY= 4;
+        BULLET_SPEED=15;
+        ENEMY_DELAY= 5;
         POWERUP_DELAY= 1;
         LIFE_DELAY= 20;
         nextLife= 5;
@@ -230,13 +231,38 @@ function destroyAndCreate(timestamp) {
         console.log('New Life Created at: ' + tick + '.  Next At: ' + nextLife);
     }
 }
+function checkLevelUp() {
+  if (player.score == 25 && player.level == 1) {
+    player.level = 2;
+    ENEMY_DELAY -= 1;
+  }
+  if (player.score == 40 && player.level == 2) {
+    player.level = 3;
+    player.size += 50;
+    BULLET_SPEED += 20;
+    ENEMY_DELAY -= 1;
+  }
+  if (player.score == 60 && player.level == 3) {
+    player.level = 4;
+    BULLET_SPEED += 50;
+    player.bullets += 20;
+    ENEMY_DELAY -= 1;
+  }
+  if (player.score == 100 && player.level == 4) {
+    player.level = 5;
+    BULLET_SPEED += 60;
+    player.bullets += 30;
+    ENEMY_DELAY -= 1;
+  }
 
+}
 
 function gameStep(timestamp) {
     if (!PAUSED && !GAMEOVER) {
         doMovement();
         checkCollisions();
         destroyAndCreate(timestamp);
+        checkLevelUp();
     }
     doRendering();
     window.requestAnimationFrame(gameStep);

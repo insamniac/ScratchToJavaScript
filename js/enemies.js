@@ -25,6 +25,7 @@ function setEnemyDefaults(enemy) {
                 x: canvas.width * Math.random()
               };
           enemy.sound = "ugh";
+          enemy.speed += player.level * 2;
 }
 
 function makeDragon() {
@@ -77,7 +78,7 @@ function makeCrazyBat() {
 function makeGhost() {
     var ghost = {
         type: 'enemy',
-        speed: 6,
+        speed: 5,
         size: randomBetween(200, 350),
         costume: images.ghost,
         effects: [motionEffects.crazy]
@@ -88,7 +89,7 @@ function makeGhost() {
 function makeGhoul() {
     var ghoul = {
         type: 'enemy',
-        speed: 12,
+        speed: 7,
         size: randomBetween(333, 555),
         costume: images.ghoul
     };

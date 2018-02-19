@@ -2,28 +2,28 @@ function makeBullet() {
 
     var bullet = {
         type: 'bullet',
-        speed: 20,
+        speed: BULLET_SPEED,
         size: BULLET_SIZE,
         costume: images.bullet,
         dir: {
             y: 0
         },
         pos: {
-            y: player.pos.y 
+            y: player.pos.y
         }
     };
 
 if (BULLET_SIZE > 20) {
     bullet.costume=images.blueBullet;
-    bullet.speed = 25;
+
 }
 if (BULLET_SIZE > 40) {
     bullet.costume=images.purpleBullet;
-    bullet.speed = 30;
+
 }
 if (BULLET_SIZE > 60) {
-    bullet.costume=images.fireBullet;
-    bullet.speed = 40;
+    bullet.costume=images.fireBullet;1
+
 }
 
 
