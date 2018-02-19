@@ -34,6 +34,7 @@ function initialState() {
             },
             size: 100,
             speed: 10,
+            lives: 3,
             dir: {
                 x: 0,
                 y: 0
@@ -141,12 +142,8 @@ function checkCollisions() {
     // check if enemy is touching witch and game over.
     entities.forEach(function(obj) {
         if (obj.type == 'enemy' && areTouching(obj,player)) {
-            gameover();
-            player.size -= 5;
-            player.speed +=1;
-            if (player.size < 10) {
-                gameover();
-            }
+            obj.destroy = true;
+            loseALife();
         } else if (obj.type == 'powerup' && areTouching(obj, player))  {
             sounds.play('yay');
             player.size+=5;
@@ -204,6 +201,23 @@ function gameStep(timestamp) {
     doRendering();
     destroyAndCreate(timestamp);
     window.requestAnimationFrame(gameStep);
+}
+
+function loseALife() {
+  player.size = 0
+  sounds.play("scream");
+  player.lives = player.lives - 1 ;
+  if (player.lives > 0) {
+    PAUSED=true;
+    setTimeout(function() {
+        PAUSED=false;
+        player.size = 100
+    }, 2000);
+
+  } else {
+      gameover();
+
+  }
 }
 
 function gameover() {
