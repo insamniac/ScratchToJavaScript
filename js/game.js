@@ -218,10 +218,8 @@ function loseALife() {
         PAUSED=false;
         player.size = 100;
     }, 2000);
-
   } else {
       gameover();
-
   }
 }
 
