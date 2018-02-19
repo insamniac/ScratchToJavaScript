@@ -1,4 +1,6 @@
 
+PAUSED=false;
+
 window.addEventListener('keydown', handleKeyEvent, false);
 window.addEventListener('keyup', handleKeyEvent, false);
 
@@ -53,6 +55,7 @@ function handleKeyEvent(e) {
                 shootNormal();
             }
             break;
+/*
         case 'f':
             if (keydown) {
                 shootBig();
@@ -68,5 +71,6 @@ function handleKeyEvent(e) {
                 shootIcy();
             }
             break;
+*/
     }
 }

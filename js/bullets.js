@@ -3,7 +3,7 @@ function makeBullet() {
     var bullet = {
         type: 'bullet',
         speed: 20,
-        size: 15,
+        size: BULLET_SIZE,
         costume: images.bullet,
         dir: {
             y: 0
@@ -12,6 +12,21 @@ function makeBullet() {
             y: player.pos.y 
         }
     };
+
+if (BULLET_SIZE > 20) {
+    bullet.costume=images.blueBullet;
+    bullet.speed = 25;
+}
+if (BULLET_SIZE > 30) {
+    bullet.costume=images.purpleBullet;
+    bullet.speed = 30;
+}
+if (BULLET_SIZE > 40) {
+    bullet.costume=images.fireBullet;
+    bullet.speed = 40;
+}
+
+
 
     return bullet;
 
@@ -29,6 +44,9 @@ function makeCustomBullet(props) {
 
 
 function shoot(bullet) {
+    if (player.bullets <= 0) {
+        return;
+    }
         bullet.dir.y = player.dir.y / 4;
     if (player.costume == player.img.right) {
         bullet.dir.x = 1;
@@ -41,6 +59,7 @@ function shoot(bullet) {
     }
     entities.push(bullet);
     sounds.play('bullet');
+    player.bullets-=1;
 }
 
 

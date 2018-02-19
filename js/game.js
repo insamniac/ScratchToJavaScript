@@ -21,6 +21,7 @@ function initialState() {
 
         GAMEOVER = false;
         PAUSED = false;
+        BULLET_SIZE=10;
         nextEnemy= 4;
         nextPowerup= 2;
         background= images.background;
@@ -38,6 +39,7 @@ function initialState() {
             lives: 3,
             score: 0,
             level: 1,
+            bullets: 20,
             dir: {
                 x: 0,
                 y: 0
@@ -132,14 +134,26 @@ function checkCollisions() {
         }
     });
 
-    // check if objects are outside game board and destroy
+    // check if objects are outside game board and bounce
     entities.forEach(function(obj) {
         if (obj.pos.x < 0 || obj.pos.x > canvas.width || obj.pos.y < 0 || obj.pos.y > canvas.height) {
-//            obj.destroy = true;
             bounce(obj);
         }
     });
 
+    // don't let witch go outside game board.
+    if (player.pos.x < 0 + player.size/ 2) {
+        player.pos.x=player.size/2;
+    }
+    if (player.pos.x > canvas.width- player.size/ 2) {
+        player.pos.x=canvas.width - player.size/ 2;
+    }
+    if (player.pos.y < 0 + player.size/ 2) {
+        player.pos.y = player.size/2;
+    }
+    if ( player.pos.y > canvas.height - player.size/ 2) {
+        player.pos.y=canvas.height - player.size / 2;
+    }
 
     // check if enemy is touching witch and game over.
     entities.forEach(function(obj) {
@@ -148,12 +162,16 @@ function checkCollisions() {
             loseALife();
         } else if (obj.type == 'powerup' && areTouching(obj, player))  {
             sounds.play('yay');
-            player.size+=5;
-            player.speed+=1;
+            BULLET_SIZE+=1
+            player.bullets+=1;
+            player.size+=1;
+            player.speed+=0.2;
             explode(obj, images.blueBullet, 15);
             obj.destroy = true;
         }
     });
+
+
 
 
 }

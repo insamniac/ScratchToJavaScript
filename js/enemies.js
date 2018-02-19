@@ -10,7 +10,7 @@ function makeEnemy() {
       setEnemyDefaults(newEnemy);
 
      var distanceToWitch = getDistance(newEnemy, player);
-      if (distanceToWitch < 501){
+      if (distanceToWitch < newEnemy.size * 2 + 300){
         newEnemy = null;
         console.log("The enemy was too close to exist in this 2D world.. R.I.P. Muahahahaha...");
       }
