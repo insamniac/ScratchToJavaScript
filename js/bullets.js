@@ -29,13 +29,14 @@ function makeCustomBullet(props) {
 
 
 function shoot(bullet) {
+        bullet.dir.y = player.dir.y / 4;
     if (player.costume == player.img.right) {
         bullet.dir.x = 1;
-        bullet.pos.x = player.pos.x + player.size / 2;
+        bullet.pos.x = player.pos.x + player.size / 2 + bullet.size / 2;
 
     } else {
         bullet.dir.x = -1;
-        bullet.pos.x = player.pos.x - player.size / 2;
+        bullet.pos.x = player.pos.x - player.size / 2 - bullet.size / 2;
 
     }
     entities.push(bullet);
