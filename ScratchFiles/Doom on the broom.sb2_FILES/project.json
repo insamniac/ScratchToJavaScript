@@ -2,12 +2,12 @@
 	"objName": "Stage",
 	"variables": [{
 			"name": "score",
-			"value": 60,
+			"value": 0,
 			"isPersistent": false
 		},
 		{
 			"name": "lives",
-			"value": 0,
+			"value": "5",
 			"isPersistent": false
 		},
 		{
@@ -37,7 +37,7 @@
 		},
 		{
 			"soundName": "cave",
-			"soundID": 6,
+			"soundID": 9,
 			"md5": "881f1bf5f301a36efcce4204a44af9ab.wav",
 			"sampleCount": 163584,
 			"rate": 22050,
@@ -45,7 +45,7 @@
 		}],
 	"costumes": [{
 			"costumeName": "backdrop1",
-			"baseLayerID": 22,
+			"baseLayerID": 21,
 			"baseLayerMD5": "739b5e2a2435f6e1ec2993791b423146.png",
 			"bitmapResolution": 1,
 			"rotationCenterX": 240,
@@ -53,7 +53,7 @@
 		},
 		{
 			"costumeName": "woods",
-			"baseLayerID": 23,
+			"baseLayerID": 22,
 			"baseLayerMD5": "a50c3550f948b17817504b0b32cdc6a0.png",
 			"bitmapResolution": 2,
 			"rotationCenterX": 480,
@@ -138,92 +138,6 @@
 			"direction": 90,
 			"rotationStyle": "normal",
 			"isDraggable": false,
-			"indexInLibrary": 3,
-			"visible": false,
-			"spriteInfo": {
-			}
-		},
-		{
-			"objName": "Fastbat",
-			"scripts": [[246,
-					17,
-					[["whenGreenFlag"],
-						["setRotationStyle", "left-right"],
-						["hide"],
-						["doForever", [["wait:elapsed:from:", ["randomFrom:to:", 5, 10]], ["createCloneOf", "_myself_"]]]]],
-				[22,
-					179,
-					[["whenCloned"],
-						["gotoX:y:", 0, 0],
-						["heading:", ["randomFrom:to:", -180, 180]],
-						["forward:", 300],
-						["show"],
-						["pointTowards:", "Witch"],
-						["doUntil",
-							["touching:", "Witch"],
-							[["forward:", ["readVariable", "gamespeed"]],
-								["doIf",
-									["touching:", "Fireball"],
-									[["doPlaySoundAndWait", "pop"], ["changeVar:by:", "score", 5], ["deleteClone"]]]]],
-						["broadcast:", "YOU LOST A LIFE??"],
-						["deleteClone"]]],
-				[379, 239, [["whenIReceive", "YOU LOST A LIFE??"], ["deleteClone"]]],
-				[35.2, 17.55, [["whenCloned"], ["doForever", [["nextCostume"], ["wait:elapsed:from:", 0.1]]]]]],
-			"sounds": [{
-					"soundName": "ya",
-					"soundID": 1,
-					"md5": "ffd03a0a27626aaf1e92d2bb1b38d86d.wav",
-					"sampleCount": 655419,
-					"rate": 11025,
-					"format": ""
-				},
-				{
-					"soundName": "pop",
-					"soundID": 0,
-					"md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
-					"sampleCount": 258,
-					"rate": 11025,
-					"format": ""
-				},
-				{
-					"soundName": "recording1",
-					"soundID": 2,
-					"md5": "b586745b98e94d7574f7f7b48d831e20.wav",
-					"sampleCount": 1,
-					"rate": 22050,
-					"format": ""
-				},
-				{
-					"soundName": "scream-female",
-					"soundID": 3,
-					"md5": "10420bb2f5a3ab440f3b10fc8ea2b08b.wav",
-					"sampleCount": 6628,
-					"rate": 11025,
-					"format": ""
-				}],
-			"costumes": [{
-					"costumeName": "bat1-a ",
-					"baseLayerID": 6,
-					"baseLayerMD5": "7ad915f8e0884f497a24d5bb61ea8a4a.svg",
-					"bitmapResolution": 1,
-					"rotationCenterX": 75,
-					"rotationCenterY": 75
-				},
-				{
-					"costumeName": "bat1-b ",
-					"baseLayerID": 7,
-					"baseLayerMD5": "f127434672b872a902346ef3c1af45f2.svg",
-					"bitmapResolution": 1,
-					"rotationCenterX": 75,
-					"rotationCenterY": 75
-				}],
-			"currentCostumeIndex": 1,
-			"scratchX": -241.89608131810925,
-			"scratchY": 175.7477904354495,
-			"scale": 1,
-			"direction": 126,
-			"rotationStyle": "leftRight",
-			"isDraggable": false,
 			"indexInLibrary": 2,
 			"visible": false,
 			"spriteInfo": {
@@ -293,13 +207,13 @@
 					"rotationCenterY": 22
 				}],
 			"currentCostumeIndex": 1,
-			"scratchX": 240,
+			"scratchX": 241,
 			"scratchY": -64.70476127563016,
 			"scale": 0.10869565217391304,
-			"direction": 105,
+			"direction": 115,
 			"rotationStyle": "normal",
 			"isDraggable": false,
-			"indexInLibrary": 4,
+			"indexInLibrary": 3,
 			"visible": false,
 			"spriteInfo": {
 			}
@@ -364,7 +278,7 @@
 				}],
 			"costumes": [{
 					"costumeName": "bat2-a ",
-					"baseLayerID": 8,
+					"baseLayerID": 6,
 					"baseLayerMD5": "647d4bd53163f94a7dabf623ccab7fd3.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 75,
@@ -372,7 +286,7 @@
 				},
 				{
 					"costumeName": "bat2-b ",
-					"baseLayerID": 9,
+					"baseLayerID": 7,
 					"baseLayerMD5": "8aa1d20e4f7761becbe9bafa75290465.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 75,
@@ -385,7 +299,7 @@
 			"direction": 90,
 			"rotationStyle": "leftRight",
 			"isDraggable": false,
-			"indexInLibrary": 5,
+			"indexInLibrary": 4,
 			"visible": false,
 			"spriteInfo": {
 			}
@@ -457,7 +371,7 @@
 				}],
 			"costumes": [{
 					"costumeName": "dragon1-a",
-					"baseLayerID": 10,
+					"baseLayerID": 8,
 					"baseLayerMD5": "e6b21f96319bda33667fa1f7b144dd9b.png",
 					"bitmapResolution": 2,
 					"rotationCenterX": 121,
@@ -465,7 +379,7 @@
 				},
 				{
 					"costumeName": "dragon1-b",
-					"baseLayerID": 11,
+					"baseLayerID": 9,
 					"baseLayerMD5": "bb58ce36997fa205a86a085f202837fd.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 84,
@@ -478,7 +392,7 @@
 			"direction": 90,
 			"rotationStyle": "leftRight",
 			"isDraggable": false,
-			"indexInLibrary": 6,
+			"indexInLibrary": 5,
 			"visible": false,
 			"spriteInfo": {
 			}
@@ -507,7 +421,7 @@
 				}],
 			"costumes": [{
 					"costumeName": "costume1",
-					"baseLayerID": 12,
+					"baseLayerID": 10,
 					"baseLayerMD5": "095760ee4ad93bc7ed2fd0480f01e0d9.png",
 					"bitmapResolution": 2,
 					"rotationCenterX": 266,
@@ -520,8 +434,8 @@
 			"direction": 90,
 			"rotationStyle": "normal",
 			"isDraggable": false,
-			"indexInLibrary": 7,
-			"visible": true,
+			"indexInLibrary": 6,
+			"visible": false,
 			"spriteInfo": {
 			}
 		},
@@ -561,7 +475,7 @@
 				}],
 			"costumes": [{
 					"costumeName": "witch",
-					"baseLayerID": 13,
+					"baseLayerID": 11,
 					"baseLayerMD5": "fcfa6b13e94fd753ba45d45cae7a56c6.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 70,
@@ -571,11 +485,11 @@
 			"scratchX": 0,
 			"scratchY": 0,
 			"scale": 0.35,
-			"direction": 158,
+			"direction": 90,
 			"rotationStyle": "normal",
 			"isDraggable": false,
 			"indexInLibrary": 1,
-			"visible": false,
+			"visible": true,
 			"spriteInfo": {
 			}
 		},
@@ -591,7 +505,7 @@
 				}],
 			"costumes": [{
 					"costumeName": "hippo1-a",
-					"baseLayerID": 14,
+					"baseLayerID": 12,
 					"baseLayerMD5": "5e06ee403b0f47008255344eeba0fac2.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 69,
@@ -599,7 +513,7 @@
 				},
 				{
 					"costumeName": "hippo1-b",
-					"baseLayerID": 15,
+					"baseLayerID": 13,
 					"baseLayerMD5": "e65ed93bbb9cccf698fc7e774ab609a6.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 69,
@@ -612,7 +526,7 @@
 			"direction": 90,
 			"rotationStyle": "normal",
 			"isDraggable": false,
-			"indexInLibrary": 8,
+			"indexInLibrary": 7,
 			"visible": false,
 			"spriteInfo": {
 			}
@@ -629,7 +543,7 @@
 				}],
 			"costumes": [{
 					"costumeName": "ghost2-a",
-					"baseLayerID": 16,
+					"baseLayerID": 14,
 					"baseLayerMD5": "607be245da950af1a4e4d79acfda46e3.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 75,
@@ -637,7 +551,7 @@
 				},
 				{
 					"costumeName": "ghost2-b",
-					"baseLayerID": 17,
+					"baseLayerID": 15,
 					"baseLayerMD5": "b9e2ebbe17c617ac182abd8bc1627693.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 75,
@@ -650,7 +564,7 @@
 			"direction": 90,
 			"rotationStyle": "normal",
 			"isDraggable": false,
-			"indexInLibrary": 9,
+			"indexInLibrary": 8,
 			"visible": false,
 			"spriteInfo": {
 			}
@@ -667,7 +581,7 @@
 				}],
 			"costumes": [{
 					"costumeName": "ghoul-a",
-					"baseLayerID": 18,
+					"baseLayerID": 16,
 					"baseLayerMD5": "70ef3e78079cf4a1c9abf32b5d982b71.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 75,
@@ -675,7 +589,7 @@
 				},
 				{
 					"costumeName": "ghoul-b",
-					"baseLayerID": 19,
+					"baseLayerID": 17,
 					"baseLayerMD5": "6e962f1248f7a7201eb24d376d804093.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 75,
@@ -688,7 +602,7 @@
 			"direction": 90,
 			"rotationStyle": "normal",
 			"isDraggable": false,
-			"indexInLibrary": 10,
+			"indexInLibrary": 9,
 			"visible": false,
 			"spriteInfo": {
 			}
@@ -697,7 +611,7 @@
 			"objName": "Powerup",
 			"costumes": [{
 					"costumeName": "star3-a",
-					"baseLayerID": 20,
+					"baseLayerID": 18,
 					"baseLayerMD5": "04da262057dfe130860086031e5018ef.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 54,
@@ -705,21 +619,67 @@
 				},
 				{
 					"costumeName": "star3-b",
-					"baseLayerID": 21,
+					"baseLayerID": 19,
 					"baseLayerMD5": "a082be13c0e5d17230f448dd55029a7d.svg",
 					"bitmapResolution": 1,
 					"rotationCenterX": 33,
 					"rotationCenterY": 34
 				}],
-			"currentCostumeIndex": 1,
+			"currentCostumeIndex": 0,
 			"scratchX": -24,
 			"scratchY": 20,
 			"scale": 1,
 			"direction": 90,
 			"rotationStyle": "normal",
 			"isDraggable": false,
-			"indexInLibrary": 11,
+			"indexInLibrary": 10,
 			"visible": false,
+			"spriteInfo": {
+			}
+		},
+		{
+			"objName": "Sprite2",
+			"sounds": [{
+					"soundName": "yay",
+					"soundID": 6,
+					"md5": "a198ae80f243213bb570113dff127bbe.wav",
+					"sampleCount": 29537,
+					"rate": 22050,
+					"format": ""
+				},
+				{
+					"soundName": "ahhh",
+					"soundID": 7,
+					"md5": "142adbd936e79afa8f62c374b12f6f2b.wav",
+					"sampleCount": 19233,
+					"rate": 22050,
+					"format": ""
+				},
+				{
+					"soundName": "ugh",
+					"soundID": 8,
+					"md5": "aa1b62894b487202e0a40d0fe64ebc2b.wav",
+					"sampleCount": 21377,
+					"rate": 22050,
+					"format": ""
+				}],
+			"costumes": [{
+					"costumeName": "costume1",
+					"baseLayerID": 20,
+					"baseLayerMD5": "d36f6603ec293d2c2198d3ea05109fe0.png",
+					"bitmapResolution": 2,
+					"rotationCenterX": 0,
+					"rotationCenterY": 0
+				}],
+			"currentCostumeIndex": 0,
+			"scratchX": 36,
+			"scratchY": -11,
+			"scale": 1,
+			"direction": 90,
+			"rotationStyle": "normal",
+			"isDraggable": false,
+			"indexInLibrary": 11,
+			"visible": true,
 			"spriteInfo": {
 			}
 		},
@@ -795,8 +755,8 @@
 		}],
 	"info": {
 		"swfVersion": "v459.1",
-		"scriptCount": 24,
-		"userAgent": "Mozilla\/5.0 (X11; Linux x86_64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/64.0.3282.140 Safari\/537.36",
+		"scriptCount": 20,
+		"userAgent": "Mozilla\/5.0 (X11; Linux x86_64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/55.0.2883.87 Safari\/537.36",
 		"hasCloudData": false,
 		"spriteCount": 11,
 		"videoOn": false,

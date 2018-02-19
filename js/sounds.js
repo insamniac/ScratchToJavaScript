@@ -11,11 +11,21 @@ var sounds = {
 //TODO: fix this sound file.... or get different background music!
   loadSound('bg', "background-music.mp3");
   loadSound('gameover', "gameover.wav");
-  loadSound('scream', "scream.wav");
+  loadSound('scream', "ahhh.wav");
+  loadSound('ugh', "ugh.wav");
+  loadSound('yay', "yay.wav");
 
 
 sounds.gainNode = sounds.context.createGain();
-sounds.gainNode.gain.value=0.1;
+sounds.gainNode.gain.value=0.0;
+
+sounds.mute = function() {
+    sounds.gainNode.gain.value=0;
+}
+
+sounds.unmute = function() {
+    sounds.gainNode.gain.value=0.1;
+}
 
 
 function loadSound(soundName, fileName) {
@@ -49,4 +59,18 @@ function playSound(name, repeat) {
 
 setTimeout(function() {
     playSound('bg', true);
-},2000);
+},3000);
+
+
+
+document.getElementById('volume-control').addEventListener('click', function(e) {
+    console.log(e);
+    if (e.target.classList.contains('muted')) {
+        sounds.unmute();
+        e.target.classList.remove("muted");
+    } else {
+        sounds.mute();
+        e.target.classList.add("muted");
+    }
+    document.activeElement.blur();
+});
