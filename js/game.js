@@ -52,6 +52,7 @@ function resetState() {
         player.pos.x = canvas.width / 2;
         player.pos.y = canvas.height / 2;
         player.dir = {x:0, y:0};
+        player.size = 100;
         entities=[];
 }
 
@@ -141,8 +142,17 @@ function checkCollisions() {
     entities.forEach(function(obj) {
         if (obj.type == 'enemy' && areTouching(obj,player)) {
             gameover();
-        } else if (obj.type == 'bullet' && areTouching(obj, player))  {
-            sounds.play('scream');
+            player.size -= 5;
+            player.speed +=1;
+            if (player.size < 10) {
+                gameover();
+            }
+        } else if (obj.type == 'powerup' && areTouching(obj, player))  {
+            sounds.play('yay');
+            player.size+=5;
+            player.speed+=1;
+            explode(obj);
+            obj.destroy = true;
         }
     });
 
