@@ -128,7 +128,7 @@ function addCostume(target, image, flip) {
 
 function explode(obj, sprite) {
     sprite = sprite || obj.costume;
-
+    var speed =  randomBetween(10,20);
     var count = 200;
     if (obj.size > 200) {
         count = obj.size;
@@ -138,7 +138,7 @@ function explode(obj, sprite) {
         var ball = {
                      costume: sprite,
                      size: randomBetween(2,4),
-                     speed: randomBetween(13,20),
+                     speed: speed,
                      pos: Object.assign({}, obj.pos),
                      dir: { y: (obj.dir.y || 1) * ( Math.random() * -1 + Math.random()),
                             x:  (obj.dir.x || 1) * (Math.random() * -1 + Math.random()) }

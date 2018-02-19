@@ -151,7 +151,7 @@ function checkCollisions() {
             sounds.play('yay');
             player.size+=5;
             player.speed+=1;
-            explode(obj);
+            explode(obj, images.blueBullet, 15);
             obj.destroy = true;
         }
     });
