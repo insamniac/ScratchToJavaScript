@@ -22,11 +22,11 @@ function initialState() {
         GAMEOVER = false;
         PAUSED = false;
         BULLET_SIZE=10;
+        ENEMY_DELAY= 4;
+        POWERUP_DELAY= 1;
         nextEnemy= 4;
         nextPowerup= 2;
         background= images.background;
-        enemyDelay= 4;
-        powerupDelay= 1;
         entities= [];
         renders = [];
         player= {
@@ -202,13 +202,13 @@ function destroyAndCreate(timestamp) {
 
     var tick = Math.floor(timestamp / 1000);
     if (tick >= nextEnemy) {
-        nextEnemy = tick+ enemyDelay;
+        nextEnemy = tick+ ENEMY_DELAY;
         var m = makeEnemy();
         entities.push(m);
         console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
     }
     if (tick >= nextPowerup) {
-        nextPowerup = tick+ powerupDelay;
+        nextPowerup = tick+ POWERUP_DELAY;
         var p = makePowerup();
         entities.push(p);
         console.log('New powerup Created at: ' + tick + '.  Next At: ' + nextPowerup);
