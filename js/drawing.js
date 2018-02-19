@@ -23,6 +23,14 @@ function drawBackground() {
     context.drawImage(images.background, 0, 0, canvas.width, canvas.height);
 }
 
+function drawScoreLevelAndLives() {
+       context.fillStyle = '#f50';
+    context.fillRect(5,50,100, 50);
+       context.fillStyle = '#000';
+    context.fillText('Score: '+player.score, 10, 60);
+    context.fillText('Level: '+player.level, 10, 75);
+    context.fillText('Lives: '+player.lives, 10, 90);
+}
 
 var motionEffects = {
 

@@ -1,3 +1,7 @@
+
+window.addEventListener('keydown', handleKeyEvent, false);
+window.addEventListener('keyup', handleKeyEvent, false);
+
 function handleKeyEvent(e) {
     if (PAUSED) {
         return;

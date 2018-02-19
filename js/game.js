@@ -1,5 +1,7 @@
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
+   context.textBaseline = 'top';
+
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -63,8 +65,6 @@ function initialize() {
 
     initialState();
     window.addEventListener('resize', resizeCanvas, false);
-    window.addEventListener('keydown', handleKeyEvent, false);
-    window.addEventListener('keyup', handleKeyEvent, false);
 
 }
 
@@ -166,7 +166,12 @@ function doRendering() {
         var r = renders.shift();
         r();
     }
+
+	drawScoreLevelAndLives();
+
 }
+
+
 
 function destroyAndCreate(timestamp) {
 
