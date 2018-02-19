@@ -24,6 +24,7 @@ function setEnemyDefaults(enemy) {
   enemy.pos = { y: canvas.height * Math.random(),
                 x: canvas.width * Math.random()
               };
+          enemy.sound = "ugh";
 }
 
 function makeDragon() {

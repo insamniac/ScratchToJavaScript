@@ -120,6 +120,7 @@ function checkCollisions() {
                     if (areTouching(obj1, obj2) && !obj1.destroy && !obj2.destroy) {
                         obj1.destroy = true;
                         obj2.destroy = true;
+                        sounds.play(obj1.sound);
                     }
                 }
             });
