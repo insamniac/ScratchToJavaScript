@@ -1,5 +1,3 @@
-DEBUG=false;
-
 function randomBetween(x, y) {
     return Math.floor(Math.random() * (y - x + 1) + x);
 }
@@ -18,19 +16,6 @@ function getDistance(obj1, obj2) {
     var dx = x1 - x2;
     var dy = y1 - y2;
     
-    if (DEBUG) {
-         var ctx= context;
-         renders.push(function() {
-         ctx.strokeStyle = 'rgb('+randomBetween(0,255)+',' + 
-                                 randomBetween(1,255) + ',' + 
-                                 randomBetween(1,255) + ')';
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-        });
-
-    }
     return Math.sqrt(dx * dx + dy * dy);
 }
 
