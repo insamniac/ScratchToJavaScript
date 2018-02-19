@@ -23,10 +23,9 @@ function initialState() {
         PAUSED = false;
         nextEnemy= 4;
         nextPowerup= 2;
-        score =  0;
         background= images.background;
         enemyDelay= 4;
-        powerupDelay= 5;
+        powerupDelay= 1;
         entities= [];
         renders = [];
         player= {
@@ -37,6 +36,8 @@ function initialState() {
             size: 100,
             speed: 10,
             lives: 3,
+            score: 0,
+            level: 1,
             dir: {
                 x: 0,
                 y: 0
@@ -124,6 +125,7 @@ function checkCollisions() {
                         obj2.destroy = true;
                         explode(obj2);
                         sounds.play(obj1.sound);
+                      player.score = player.score + 1 ;
                     }
                 }
             });
@@ -212,6 +214,10 @@ function loseALife() {
   sounds.play("scream");
   player.lives = player.lives - 1 ;
   explode(player);
+   player.dir = {
+      x: 0,
+      y: 0
+   }
   if (player.lives > 0) {
     PAUSED=true;
     setTimeout(function() {
