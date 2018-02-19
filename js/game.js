@@ -20,9 +20,11 @@ function initialState() {
         GAMEOVER = false;
         PAUSED = false;
         nextEnemy= 4;
+        nextPowerup= 2;
         score =  0;
         background= images.background;
         enemyDelay= 4;
+        powerupDelay= 5;
         entities= [];
         renders = [];
         player= {
@@ -36,7 +38,7 @@ function initialState() {
                 x: 0,
                 y: 0
             }
-        }; 
+        };
 
 
     addCostume(player, images.witch, true);
@@ -171,7 +173,16 @@ function destroyAndCreate(timestamp) {
             console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
         }
     }
+    if (tick >= nextPowerup) {
+        nextPowerup = tick+ powerupDelay;
+        var p = makePowerup();
+        if (!GAMEOVER) {
+            entities.push(p);
+            console.log('New powerup Created at: ' + tick + '.  Next At: ' + nextPowerup);
+        }
+    }
 }
+
 
 function gameStep(timestamp) {
     doMovement();
