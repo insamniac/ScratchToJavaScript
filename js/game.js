@@ -111,6 +111,7 @@ function doMovement() {
 
 function checkCollisions() {
 
+
     // check enemy/bullet collisions
     entities.forEach(function(obj1) {
         if (obj1.type == 'enemy') {
@@ -128,14 +129,15 @@ function checkCollisions() {
     // check if objects are outside game board and destroy
     entities.forEach(function(obj) {
         if (obj.pos.x < 0 || obj.pos.x > canvas.width || obj.pos.y < 0 || obj.pos.y > canvas.height) {
-            obj.destroy = true;
+//            obj.destroy = true;
+            bounce(obj);
         }
     });
 
 
     // check if enemy is touching witch and game over.
     entities.forEach(function(obj) {
-        if (obj.type == 'enemy') {
+        if (obj.type == 'enemy' || obj.type == 'bullet') {
             if (areTouching(obj,player)) {
                 gameover();
             }

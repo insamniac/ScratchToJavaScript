@@ -47,3 +47,17 @@ function findClosestOfType(obj1, type) {
 
 }
 
+
+function bounce(obj) {
+    if (obj.pos.x < 0 && obj.dir.x < 0) {
+        obj.dir.x *= -1;
+    } else if (obj.pos.x > canvas.width && obj.dir.x > 0) {
+        obj.dir.x *= -1;
+    } else if (obj.pos.y < 0 && obj.dir.y < 0) {
+        obj.dir.y *= -1;
+    } else if (obj.pos.y > canvas.height && obj.dir.y > 0) {
+        obj.dir.y *= -1;
+    }
+    
+
+}
