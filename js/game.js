@@ -167,7 +167,6 @@ function checkCollisions() {
             obj.destroy = true;
             loseALife();
         } else if (obj.type == 'powerup' && areTouching(obj, player))  {
-            sounds.play('yay');
             BULLET_SIZE+=1
             player.bullets+=1;
             player.size+=1;
@@ -236,6 +235,7 @@ function levelUp() {
     player.level+=1;
     BG_SOURCE.stop();
     sounds.play('level-up');
+    cycleBackgroundMusic();
 }
 
 function checkLevelUp() {
@@ -243,28 +243,24 @@ function checkLevelUp() {
     levelUp();
     BG_TINT='blue';
     ENEMY_DELAY -= 1;
-    setTimeout(function(){
-        changeBackgroundMusic('car-theft');
-    },1500);
   }
   if (player.score == 40 && player.level == 2) {
     levelUp();
-    BG_TINT='red';
+    BG_TINT='green';
     player.size += 50;
     BULLET_SPEED += 20;
     ENEMY_DELAY -= 1;
-    setTimeout(function(){
-        changeBackgroundMusic('car-theft');
-    },1500);
   }
   if (player.score == 60 && player.level == 3) {
-    player.level = 4;
+      levelUp();
+    BG_TINT='gray';
     BULLET_SPEED += 50;
     player.bullets += 20;
     ENEMY_DELAY -= 1;
   }
   if (player.score == 100 && player.level == 4) {
-    player.level = 5;
+      levelUp();
+    BG_TINT='red';
     BULLET_SPEED += 60;
     player.bullets += 30;
     ENEMY_DELAY -= 1;
