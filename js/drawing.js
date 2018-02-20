@@ -1,5 +1,6 @@
 // all of our images and some drawing functions
 
+/*
 var images = {
     witch: loadImage("witch.png"),
     bullet: loadImage("bullet.svg"),
@@ -17,6 +18,26 @@ var images = {
     gameover: loadImage("gameover.png")
 
 };
+*/
+
+var images = {
+    background: loadImage("background.png"),
+    witch: loadImage("witch.png"),
+    bullet: loadImage("bullet.svg"),
+    purpleBullet: loadImage("purplestickyball.png"),
+    blueBullet: loadImage("fireworkfreezingiceball.png"),
+    fireBullet: loadImage("fireball.svg"),
+    dragon: loadImages(["dragon.png", "dragon2.svg"]),
+    blackBat: loadImages(["black-bat-1.svg","black-bat-2.svg"]),
+    brownBat: loadImages(["brown-bat-1.svg", "brown-bat-2.svg"]),
+    powerup: loadImage("Powerup.svg"),
+    life: loadImages(["Life.svg","Life2.svg"]),
+    ghost: loadImages(["Ghost.svg","Ghost2.svg"]),
+    ghoul: loadImages(["Ghoul.svg","Ghoul2.svg"]),
+    gameover: loadImage("gameover.png")
+
+};
+
 
 BG_TINT='black'
 function drawBackground() {
@@ -42,9 +63,9 @@ function drawScoreLevelAndLives() {
 var motionEffects = {
 
     crazy: function(obj) {
-        obj.dir.y += randomBetween(-1,1);
-        obj.dir.x += randomBetween(-1,1);
-        obj.size  += randomBetween(-10,10);
+        obj.dir.y = randomBetween(0, obj.dir.y * 2) ;
+        obj.dir.x = randomBetween(obj.dir.x, obj.dir.x * 2) ;
+       obj.size  += randomBetween(-10,10);
         if (obj.size < 40) {
             obj.size = 40;
         }
@@ -63,7 +84,11 @@ var motionEffects = {
 // these properties:  [costume, pos.x, pos.y, size]
 
 function render(obj, ctx) {
-    if (!obj.costume || !obj.costume.complete) {
+    var costume = obj.costume;
+    if (Array.isArray(costume)) {
+        costume=costume[~~(new Date().getMilliseconds() / 500)  % 2];
+    }
+    if (!costume || !costume.complete) {
         return;
     }
     if (obj.render && typeof(obj.render) === 'function') {
@@ -73,9 +98,16 @@ function render(obj, ctx) {
     var y = obj.pos.y;
     var w = obj.width || obj.size;
     var h = obj.height || obj.size;
+        ctx.save()
     ctx.translate(x + w/2, y + h/2);
-    ctx.drawImage(obj.costume, -w, -h, w, h);
+    if (obj.facing && obj.facing == 'left') {
+        ctx.scale(-1,1);
+        ctx.drawImage(costume, 0, -h, w, h);
+    } else {
+        ctx.drawImage(costume, -w, -h, w, h);
+    }
     ctx.translate(-x - w/2, -y - h/2);
+        ctx.restore()
 }
 
 // this takes an image and flips it along the y-axis and returns it as a new image.
@@ -155,8 +187,8 @@ function explode(obj, sprite) {
                      size: randomBetween(2,4),
                      speed: speed,
                      pos: Object.assign({}, obj.pos),
-                     dir: { y: obj.dir.y +  ( Math.random() * -1 + Math.random()),
-                            x: obj.dir.x  +  (Math.random() * -1 + Math.random()) }
+                     dir: { y: (obj.dir.y * obj.speed)  / speed  +  ( Math.random() * -1 + Math.random()),
+                            x: ( obj.dir.x  * obj.speed) / speed +  (Math.random() * -1 + Math.random()) }
                 
         };
         fireballs.push(ball);

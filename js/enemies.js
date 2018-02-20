@@ -33,7 +33,9 @@ function makeDragon() {
         type: 'enemy',
         speed: 4,
         size: randomBetween(200, 400),
-        costume: images.dragon
+        costume: images.dragon,
+        attackRange: 1000
+
     };
     return dragon;
 }
@@ -91,7 +93,8 @@ function makeGhoul() {
         type: 'enemy',
         speed: 7,
         size: randomBetween(333, 555),
-        costume: images.ghoul
+        costume: images.ghoul,
+        attackRange: 2000
     };
     return ghoul;
 }

@@ -39,7 +39,7 @@ function makeLife() {
   return newLife;
 }
 function setPowerupDefaults(powerup) {
-  powerup.dir = { y: 0, x: 0 };
+  powerup.dir = { y: randomBetween(-5,5), x: randomBetween(-5,5) };
   powerup.pos = { y: canvas.height * Math.random(),
                 x: canvas.width * Math.random()
               };
@@ -48,7 +48,7 @@ function setPowerupDefaults(powerup) {
 function makeLifeHippo() {
     var lifeHippo = {
         type: 'powerup',
-        speed: 9,
+        speed: 0.1,
         size: 40,
         costume: images.life
     };
@@ -57,7 +57,7 @@ function makeLifeHippo() {
 function makeLifeStar() {
     var lifeStar = {
         type: 'life',
-        speed: 9,
+        speed: 10,
         size: 40,
         costume: images.powerup
     };

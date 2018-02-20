@@ -76,17 +76,9 @@ function initialize() {
 }
 
 function pointToward(obj1, obj2, precision) {
-    precision = precision || 1;
-    if (obj1.pos.x > obj2.pos.x) {
-        obj1.dir.x = -1;
-    } else {
-        obj1.dir.x = 1;
-    }
-    if (obj1.pos.y > obj2.pos.y) {
-        obj1.dir.y = -1;
-    } else {
-        obj1.dir.y = 1;
-    }
+    var d =getDistance(obj1, obj2);
+    obj1.dir.x = (obj2.pos.x - obj1.pos.x) / d;
+    obj1.dir.y = (obj2.pos.y - obj1.pos.y) / d; 
 }
 
 function move(obj) {
@@ -103,16 +95,16 @@ function move(obj) {
 }
 
 function doMovement() {
-    if (player.dir.x > 0) {
-        player.costume = player.img.right;
-    } else if (player.dir.x < 0) {
-        player.costume = player.img.left;
-    }
-
-    move(player);
-    entities.forEach(function(obj) {
+    [player].concat(entities).forEach(function(obj) {
+        if (obj.dir && obj.dir.x > 0) {
+            obj.facing = 'right';
+        } else if (obj.dir && obj.dir.x < 0) {
+            obj.facing = 'left';
+        }
         if (obj.type == 'enemy') {
-            pointToward(obj, player);
+            if (getDistance(obj, player) < (obj.attackRange || 800)) {
+                pointToward(obj, player);
+            }
         }
         move(obj);
     });

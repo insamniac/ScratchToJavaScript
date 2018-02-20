@@ -48,7 +48,7 @@ function shoot(bullet) {
         return;
     }
         bullet.dir.y = player.dir.y / 4;
-    if (player.costume == player.img.right) {
+    if (player.facing == 'right') {
         bullet.dir.x = 1;
         bullet.pos.x = player.pos.x + player.size / 2 + bullet.size / 2;
 
