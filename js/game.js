@@ -129,6 +129,7 @@ function checkCollisions() {
                     if (areTouching(obj1, obj2) && !obj1.destroy && !obj2.destroy) {
                         obj1.destroy = true;
                         obj2.destroy = true;
+                        explode(obj1);
                         explode(obj2);
                         if (obj1.type == 'enemy') {
                             sounds.play(obj1.sound);
@@ -239,7 +240,7 @@ function levelUp() {
 }
 
 function checkLevelUp() {
-  if (player.score == 5 && player.level == 1) {
+  if (player.score == 15 && player.level == 1) {
     levelUp();
     BG_TINT='blue';
     ENEMY_DELAY -= 1;

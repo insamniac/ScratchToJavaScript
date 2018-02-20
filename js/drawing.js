@@ -144,9 +144,9 @@ function addCostume(target, image, flip) {
 function explode(obj, sprite) {
     sprite = sprite || obj.costume;
     var speed =  randomBetween(10,20);
-    var count = 200;
+    var count = 50;
     if (obj.size > 200) {
-        count = obj.size;
+        count = obj.size / 4;
     }
     var fireballs=[];
     for (var i=0; i<count ; i++) {
