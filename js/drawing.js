@@ -86,7 +86,7 @@ var motionEffects = {
 function render(obj, ctx) {
     var costume = obj.costume;
     if (Array.isArray(costume)) {
-        costume=costume[~~(new Date().getMilliseconds() / 500)  % 2];
+        costume=costume[ANIMATION_FRAME];
     }
     if (!costume || !costume.complete) {
         return;

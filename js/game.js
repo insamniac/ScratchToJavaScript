@@ -261,8 +261,11 @@ function checkLevelUp() {
 
 }
 
+var ANIMATION_FRAME=0;
+
 function gameStep(timestamp) {
     if (!PAUSED && !GAMEOVER) {
+        ANIMATION_FRAME=~~(timestamp / 500)  % 2;
         doMovement();
         checkCollisions();
         destroyAndCreate(timestamp);
