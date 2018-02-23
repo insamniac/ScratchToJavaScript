@@ -34,7 +34,7 @@ var images = {
     life: loadImages(["Life.svg","Life2.svg"]),
     ghost: loadImages(["Ghost.svg","Ghost2.svg"]),
     ghoul: loadImages(["Ghoul.svg","Ghoul2.svg"]),
-    redDragon: loadImage("red-dragon.png"),
+    dragon: loadImage("red-dragon.png"),
     gameover: loadImage("gameover.png")
 
 };

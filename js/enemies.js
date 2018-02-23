@@ -103,7 +103,7 @@ function makeRedDragon() {
         type: 'enemy',
         speed: 7,
         size: randomBetween(333, 555),
-        costume: images.dragon
+        costume: images.dragon,
         attackRange: 2000
     };
     return ghoul;
