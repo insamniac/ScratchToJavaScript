@@ -1,6 +1,6 @@
 function makeEnemy() {
 
- var enemyFunctionsList = [makeDragon, makeCrazyBat, makeBlackBat, makeBrownBat, makeGhost, makeGhoul];
+ var enemyFunctionsList = [makeDragon, makeCrazyBat, makeBlackBat, makeBrownBat, makeGhost, makeGhoul, makeRedDragon];
  var newEnemy = null;
  while (newEnemy == null) {
 
@@ -103,7 +103,7 @@ function makeRedDragon() {
         type: 'enemy',
         speed: 7,
         size: randomBetween(333, 555),
-        costume: images.,
+        costume: images.dragon
         attackRange: 2000
     };
     return ghoul;
