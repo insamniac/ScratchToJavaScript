@@ -1,5 +1,5 @@
 
-PAUSED=false;
+PAUSED = false;
 
 window.addEventListener('keydown', handleKeyEvent, false);
 window.addEventListener('keyup', handleKeyEvent, false);

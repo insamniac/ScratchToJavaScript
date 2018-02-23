@@ -10,9 +10,9 @@ function makeEnemy() {
       setEnemyDefaults(newEnemy);
 
      var distanceToWitch = getDistance(newEnemy, player);
-      if (distanceToWitch < newEnemy.size * 2 + 300){
+      if (distanceToWitch < newEnemy.size * 2 + 300) {
         newEnemy = null;
-        console.log("The enemy was too close to exist in this 2D world.. R.I.P. Muahahahaha...");
+        console.log('The enemy was too close to exist in this 2D world.. R.I.P. Muahahahaha...');
       }
  }
 
@@ -24,7 +24,7 @@ function setEnemyDefaults(enemy) {
   enemy.pos = { y: canvas.height * Math.random(),
                 x: canvas.width * Math.random()
               };
-          enemy.sound = "ugh";
+          enemy.sound = 'ugh';
           enemy.speed += player.level * 2;
 }
 

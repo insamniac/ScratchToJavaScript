@@ -14,15 +14,15 @@ function makeBullet() {
     };
 
 if (BULLET_SIZE > 20) {
-    bullet.costume=images.blueBullet;
+    bullet.costume = images.blueBullet;
 
 }
 if (BULLET_SIZE > 40) {
-    bullet.costume=images.purpleBullet;
+    bullet.costume = images.purpleBullet;
 
 }
 if (BULLET_SIZE > 60) {
-    bullet.costume=images.fireBullet;1
+    bullet.costume = images.fireBullet;1;
 
 }
 
@@ -35,7 +35,7 @@ if (BULLET_SIZE > 60) {
 
 
 function makeCustomBullet(props) {
-    var b = makeBullet()
+    var b = makeBullet();
     for (p in props) {
         b[p] = props[p];
     }
@@ -59,7 +59,7 @@ function shoot(bullet) {
     }
     entities.push(bullet);
     sounds.play('bullet');
-    player.bullets-=1;
+    player.bullets -= 1;
 }
 
 
@@ -75,7 +75,7 @@ function shootBig() {
         dir: {
             y: randomBetween(-1, 1)
         }
-    }
+    };
     var b = makeCustomBullet(props);
     shoot(b);
 }
@@ -88,7 +88,7 @@ function shootTiny() {
         dir: {
             y: randomBetween(-1, 1)
         }
-    }
+    };
     var b = makeCustomBullet(props);
     shoot(b);
 }
@@ -101,7 +101,7 @@ function shootIcy() {
         dir: {
             y: randomBetween(-1, 1)
         }
-    }
+    };
     var b = makeCustomBullet(props);
     shoot(b);
 }

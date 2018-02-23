@@ -21,22 +21,23 @@ function initialState() {
 
         GAMEOVER = false;
         PAUSED = false;
-        BULLET_SIZE=10;
-        BULLET_SPEED=15;
-        ENEMY_DELAY= 5;
-        POWERUP_DELAY= 1;
-        LIFE_DELAY= 20;
-        nextLife= 5;
-        nextEnemy= 4;
-        nextPowerup= 2;
-        background= images.background;
-        entities= [];
+        BULLET_SIZE = 10;
+        BULLET_SPEED = 15;
+        ENEMY_DELAY = 5;
+        POWERUP_DELAY = 1;
+        LIFE_DELAY = 20;
+        nextLife = 5;
+        nextEnemy = 4;
+        nextPowerup = 2;
+        background = images.background;
+        entities = [];
         renders = [];
-        player= {
+        player = {
             pos: {
                 x: canvas.width / 2,
                 y: canvas.height / 2
             },
+            facing: 'right',
             size: 100,
             speed: 10,
             lives: 3,
@@ -56,14 +57,14 @@ function initialState() {
 
 function resetState() {
 
-        GAMEOVER= false;
-        BULLET_SIZE=10;
+        GAMEOVER = false;
+        BULLET_SIZE = 10;
         nextEnemy = 4;
         player.pos.x = canvas.width / 2;
         player.pos.y = canvas.height / 2;
-        player.dir = {x:0, y:0};
+        player.dir = {x: 0, y: 0};
         player.size = 100;
-        entities=[];
+        entities = [];
 }
 
 
@@ -103,11 +104,15 @@ function move(obj) {
 }
 
 function doMovement() {
-    if (player.dir.x > 0) {
-        player.costume = player.img.right;
-    } else if (player.dir.x < 0) {
-        player.costume = player.img.left;
+
+    [player].concat(entities).forEach(function(obj) {
+          if (obj.dir && obj.dir.x > 0) {
+               obj.facing = 'right';
+    } else if (obj.dir && obj.dir.x < 0) {
+            obj.facing = 'left';
     }
+    });
+
 
     move(player);
     entities.forEach(function(obj) {
@@ -134,7 +139,7 @@ function checkCollisions() {
                         explode(obj2);
                         if (obj1.type == 'enemy') {
                             sounds.play(obj1.sound);
-                            player.score = player.score + 1 ;
+                            player.score = player.score + 1;
                         }
                     }
                 }
@@ -150,33 +155,32 @@ function checkCollisions() {
     });
 
     // don't let witch go outside game board.
-    if (player.pos.x < 0 + player.size/ 2) {
-        player.pos.x=player.size/2;
+    if (player.pos.x < 0 + player.size / 2) {
+        player.pos.x = player.size / 2;
     }
-    if (player.pos.x > canvas.width- player.size/ 2) {
-        player.pos.x=canvas.width - player.size/ 2;
+    if (player.pos.x > canvas.width - player.size / 2) {
+        player.pos.x = canvas.width - player.size / 2;
     }
-    if (player.pos.y < 0 + player.size/ 2) {
-        player.pos.y = player.size/2;
+    if (player.pos.y < 0 + player.size / 2) {
+        player.pos.y = player.size / 2;
     }
-    if ( player.pos.y > canvas.height - player.size/ 2) {
-        player.pos.y=canvas.height - player.size / 2;
+    if (player.pos.y > canvas.height - player.size / 2) {
+        player.pos.y = canvas.height - player.size / 2;
     }
 
     // check if enemy is touching witch and game over.
     entities.forEach(function(obj) {
-        if (obj.type == 'enemy' && areTouching(obj,player)) {
+        if (obj.type == 'enemy' && areTouching(obj, player)) {
             obj.destroy = true;
             loseALife();
-        } else if (obj.type == 'powerup' && areTouching(obj, player))  {
-            sounds.play('yay');
-            BULLET_SIZE+=1
-            player.bullets+=1;
-            player.size+=1;
-            player.speed+=0.2;
-            explode(obj, images.blueBullet, 15);
+        } else if (obj.type == 'powerup' && areTouching(obj, player)) {
+            BULLET_SIZE += 1;
+            player.bullets += 1;
+            player.size += 1;
+            player.speed += 0.2;
+            explode(obj, images.blueBullet);
             obj.destroy = true;
-        }   else if (obj.type == 'life' && areTouching(obj, player))  {
+        } else if (obj.type == 'life' && areTouching(obj, player)) {
             sounds.play('yay');
             player.lives += 1;
             explode(obj);
@@ -195,7 +199,7 @@ function doRendering() {
     entities.forEach(function(x) {
         render(x, context);
     });
-    while (renders.length > 0 ) {
+    while (renders.length > 0) {
         var r = renders.shift();
         r();
     }
@@ -210,59 +214,72 @@ function destroyAndCreate(timestamp) {
 
 
     entities = entities.filter(function(obj) {
-        return !obj.destroy
+        return !obj.destroy;
     });
 
     var tick = Math.floor(timestamp / 1000);
     if (tick >= nextEnemy) {
-        nextEnemy = tick+ ENEMY_DELAY;
+        nextEnemy = tick + ENEMY_DELAY;
         var m = makeEnemy();
         entities.push(m);
         console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
     }
     if (tick >= nextPowerup) {
-        nextPowerup = tick+ POWERUP_DELAY;
+        nextPowerup = tick + POWERUP_DELAY;
         var p = makePowerup();
         entities.push(p);
         console.log('New powerup Created at: ' + tick + '.  Next At: ' + nextPowerup);
     }
     if (tick >= nextLife) {
-        nextLife = tick+ LIFE_DELAY;
+        nextLife = tick + LIFE_DELAY;
         var p = makeLife();
         entities.push(p);
         console.log('New Life Created at: ' + tick + '.  Next At: ' + nextLife);
     }
 }
+
+function levelUp() {
+player.level += 1;
+BG_SOURCE.stop();
+sounds.play('level-up');
+cycleBackgroundMusic();
+
+}
+
 function checkLevelUp() {
   if (player.score == 15 && player.level == 1) {
-    player.level = 2;
+      levelUp();
     ENEMY_DELAY -= 1;
+      BG_TINT='green';
   }
   if (player.score == 30 && player.level == 2) {
-    player.level = 3;
+      levelUp();
     player.size += 50;
     BULLET_SPEED += 20;
     ENEMY_DELAY -= 1;
+      BG_TINT='blue';
   }
   if (player.score == 50 && player.level == 3) {
-    player.level = 4;
+      levelUp();
     BULLET_SPEED += 50;
     player.bullets += 20;
     ENEMY_DELAY -= 1;
+      BG_TINT='grey';
   }
   if (player.score == 100 && player.level == 4) {
-    player.level = 5;
+      levelUp();
     BULLET_SPEED += 60;
     player.bullets += 30;
     ENEMY_DELAY -= 1;
+      BG_TINT='red';
   }
   if (player.score == 300 && player.level == 5) {
-    player.level = 6;
+      levelUp();
     player.bullets += 70;
     ENEMY_DELAY -= 1;
   }
   if (player.score == 500 && player.level == 6) {
-    player.level = 7;
+      levelUp();
     BULLET_SPEED += 60;
     player.bullets += 150;
     ENEMY_DELAY -= 2;
@@ -270,10 +287,10 @@ function checkLevelUp() {
 
 }
 
-var ANIMATION_FRAME
+var ANIMATION_FRAME;
 function gameStep(timestamp) {
     if (!PAUSED && !GAMEOVER) {
-        ANIMATION_FRAME=~~(timestamp / 500)  % 2;
+        ANIMATION_FRAME = ~~(timestamp / 500) % 2;
         doMovement();
         checkCollisions();
         destroyAndCreate(timestamp);
@@ -285,17 +302,17 @@ function gameStep(timestamp) {
 
 
 function loseALife() {
-  sounds.play("scream");
-  player.lives = player.lives - 1 ;
+  sounds.play('scream');
+  player.lives = player.lives - 1;
   explode(player);
    player.dir = {
       x: 0,
       y: 0
-   }
+   };
   if (player.lives > 0) {
-    PAUSED=true;
+    PAUSED = true;
     setTimeout(function() {
-        PAUSED=false;
+        PAUSED = false;
     }, 2000);
   } else {
       gameover();
@@ -303,20 +320,20 @@ function loseALife() {
 }
 
 function gameover() {
-    GAMEOVER=true;
-    PAUSED=true;
+    GAMEOVER = true;
+    PAUSED = true;
     setTimeout(function() {
-        PAUSED=false;
+        PAUSED = false;
     }, 1000);
     sounds.play('scream');
-    var gOver=  { type: 'gameover',
+    var gOver = { type: 'gameover',
                   pos: { x: canvas.width / 2,
                          y: canvas.height / 2},
                   height: 500,
                   width: 800,
                   costume: images.gameover};
 //    render(gOver, context);
-    entities=[gOver];
+    entities = [gOver];
 
 }
 
