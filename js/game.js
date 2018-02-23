@@ -106,7 +106,9 @@ function doMovement() {
                 pointToward(obj, player);
             }
         }
-        move(obj);
+        if (obj.type != 'powerup') {
+            move(obj);
+        }
     });
 }
 
