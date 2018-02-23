@@ -98,3 +98,13 @@ function makeGhoul() {
     };
     return ghoul;
 }
+function makeRedDragon() {
+    var red = {
+        type: 'enemy',
+        speed: 7,
+        size: randomBetween(333, 555),
+        costume: images.,
+        attackRange: 2000
+    };
+    return ghoul;
+}

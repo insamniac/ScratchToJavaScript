@@ -34,6 +34,7 @@ var images = {
     life: loadImages(["Life.svg","Life2.svg"]),
     ghost: loadImages(["Ghost.svg","Ghost2.svg"]),
     ghoul: loadImages(["Ghoul.svg","Ghoul2.svg"]),
+    redDragon: load
     gameover: loadImage("gameover.png")
 
 };
@@ -186,15 +187,13 @@ function explode(obj) {
                      pos: {y: obj.pos.y, x: obj.pos.x},
                      dir: { y: (obj.dir.y * obj.speed)  / speed  +  ( Math.random() * -1 + Math.random()),
                             x: ( obj.dir.x  * obj.speed) / speed +  (Math.random() * -1 + Math.random()) }
-                
+
         };
         fireballs.push(ball);
         entities.push(ball);
     };
-    setTimeout(function(){ 
+    setTimeout(function(){
         fireballs.forEach(function(f) {f.destroy=true});
     }, 1000 );
 
 }
-
-
