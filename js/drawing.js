@@ -176,14 +176,12 @@ function addCostume(target, image, flip) {
 function explode(obj) {
     var speed =  randomBetween(10,20);
     var count = 50;
-    if (obj.size > 200) {
-        count = obj.size / 4;
-    }
+    var maxChunk = obj.size / count + 3;
     var fireballs=[];
     for (var i=0; i<count ; i++) {
         var ball = {
                      costume: obj.costume,
-                     size: randomBetween(5,9),
+                     size: randomBetween(1,maxChunk),
                      speed: speed,
                      pos: {y: obj.pos.y, x: obj.pos.x},
                      dir: { y: (obj.dir.y * obj.speed)  / speed  +  ( Math.random() * -1 + Math.random()),
