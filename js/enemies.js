@@ -99,12 +99,12 @@ function makeGhoul() {
     return ghoul;
 }
 function makeRedDragon() {
-    var red = {
+    var dragon = {
         type: 'enemy',
         speed: 7,
         size: randomBetween(333, 555),
         costume: images.dragon,
         attackRange: 2000
     };
-    return ghoul;
+    return dragon;
 }
