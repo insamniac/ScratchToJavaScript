@@ -3,12 +3,13 @@ function randomBetween(x, y) {
 }
 
 function areTouching(obj1, obj2, buffer) {
+    buffer = buffer || 10;
     var distance = getDistance(obj1, obj2);
     return (distance < (obj1.size / 2 + obj2.size / 2) - buffer);
 }
 
 function getDistance(obj1, obj2) {
-    var xDiff = obj1.pos.x - obj2.pos.x;;
+    var xDiff = obj1.pos.x - obj2.pos.x;
     var yDiff = obj1.pos.y - obj2.pos.y;
 
     return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
