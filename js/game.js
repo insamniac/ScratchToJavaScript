@@ -343,8 +343,8 @@ function gameover() {
 initialize();
 window.requestAnimationFrame(gameStep);
 
-
-document.getElementById('pause-control').addEventListener('click', function(e) {
+var PAUSE_CONTROL=document.getElementById('pause-control');
+        PAUSE_CONTROL.addEventListener('click', function(e) {
         if (e.target.classList.contains('paused')) {
         PAUSED=false;
         e.target.classList.remove("paused");

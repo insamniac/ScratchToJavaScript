@@ -86,8 +86,8 @@ setTimeout(function() {
 },3000);
 
 
-
-document.getElementById('volume-control').addEventListener('click', function(e) {
+VOLUME_CONTROL=document.getElementById('volume-control');
+VOLUME_CONTROL.addEventListener('click', function(e) {
     console.log(e);
     if (e.target.classList.contains('muted')) {
         sounds.unmute();

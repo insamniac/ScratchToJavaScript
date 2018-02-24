@@ -57,22 +57,16 @@ function handleKeyEvent(e) {
                 shootNormal();
             }
             break;
-/*
-        case 'f':
+
+        case 'p':
             if (keydown) {
-                shootBig();
+                PAUSE_CONTROL.click();
             }
             break;
-        case 't':
+        case 'm':
             if (keydown) {
-                shootTiny();
+                VOLUME_CONTROL.click();
             }
             break;
-        case 'g':
-            if (keydown) {
-                shootIcy();
-            }
-            break;
-*/
     }
 }
