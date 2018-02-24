@@ -13,22 +13,23 @@ var sounds = {
   loadSound('desert-mayhem', 'desert-mayhem.mp3');
   loadSound('street-chaos', 'street-chaos.mp3');
   loadSound('fantasy-forest-battle', 'fantasy-forest-battle.mp3');
+  loadSound('into-battle', 'into-battle.mp3');
   loadSound('gameover', 'gameover.wav');
   loadSound('scream', 'ahhh.wav');
   loadSound('ugh', 'ugh.wav');
   loadSound('yay', 'yay.wav');
   loadSound('level-up', 'level-up.mp3');
 
-sounds.bgList = ['bg-default', 'car-theft', 'desert-mayhem', 'street-chaos', 'fantasy-forest-battle'];
+sounds.bgList = ['bg-default', 'car-theft', 'desert-mayhem', 'street-chaos', 'fantasy-forest-battle', 'into-battle'];
 sounds.gainNode = sounds.context.createGain();
-sounds.gainNode.gain.value = 0.1;
+sounds.gainNode.gain.value = 0.5;
 
 sounds.mute = function() {
     sounds.gainNode.gain.value = 0;
 };
 
 sounds.unmute = function() {
-    sounds.gainNode.gain.value = 0.1;
+    sounds.gainNode.gain.value = 0.5;
 };
 
 sounds.setVolume = function(v) {

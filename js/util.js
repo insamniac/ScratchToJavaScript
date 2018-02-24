@@ -3,20 +3,15 @@ function randomBetween(x, y) {
 }
 
 function areTouching(obj1, obj2, buffer) {
-    buffer = buffer || 10;
     var distance = getDistance(obj1, obj2);
     return (distance < (obj1.size / 2 + obj2.size / 2) - buffer);
 }
 
 function getDistance(obj1, obj2) {
-    var x1 = obj1.pos.x;
-    var y1 = obj1.pos.y;
-    var x2 = obj2.pos.x;
-    var y2 = obj2.pos.y;
-    var dx = x1 - x2;
-    var dy = y1 - y2;
+    var xDiff = obj1.pos.x - obj2.pos.x;;
+    var yDiff = obj1.pos.y - obj2.pos.y;
 
-    return Math.sqrt(dx * dx + dy * dy);
+    return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 }
 
 function findClosestOfType(obj1, type) {
