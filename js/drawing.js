@@ -169,8 +169,8 @@ function explode(obj, img) {
                      size: randomBetween(1, 5),
                      speed: 10,
                      pos: {y: obj.pos.y, x: obj.pos.x},
-                     dir: { y: obj.dir.y + (Math.random() * -1 + Math.random()),
-                            x: obj.dir.x + (Math.random() * -1 + Math.random()) }
+                     dir: { y: (obj.dir.y * obj.speed) / 10 + (Math.random() * -1 + Math.random()),
+                            x: (obj.dir.x * obj.speed) / 10 + (Math.random() * -1 + Math.random()) }
 
         };
         balls.push(ball);
