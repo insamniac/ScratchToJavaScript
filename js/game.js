@@ -64,6 +64,8 @@ function resetState() {
         player.pos.y = canvas.height / 2;
         player.dir = {x: 0, y: 0};
         player.size = 100;
+        player.speed=10;
+        player.lives=3;
         entities = [];
 }
 
@@ -90,7 +92,7 @@ function pointToward(obj1, obj2, precision) {
     }
 }
 
-function move(obj) {
+function move(obj,delta) {
     if (!obj.dir) {
         return;
     }
@@ -99,29 +101,21 @@ function move(obj) {
             e(obj);
         });
     }
-    obj.pos.x += obj.speed * obj.dir.x;
-    obj.pos.y += obj.speed * obj.dir.y;
+    obj.pos.x += obj.speed * obj.dir.x * delta;
+    obj.pos.y += obj.speed * obj.dir.y * delta;
 }
 
-function doMovement() {
-
-    [player].concat(entities).forEach(function(obj) {
-          if (obj.dir && obj.dir.x > 0) {
-               obj.facing = 'right';
-    } else if (obj.dir && obj.dir.x < 0) {
-            obj.facing = 'left';
-    }
-    });
+function doMovement(delta) {
 
 
-    move(player);
+    move(player, delta);
     entities.forEach(function(obj) {
         if (obj.type == 'enemy') {
             pointToward(obj, player);
         }
-        if (obj.type != 'powerup') {
-            move(obj);
-        }
+//        if (obj.type != 'powerup') {
+        move(obj, delta);
+//        }
     });
 }
 
@@ -288,15 +282,21 @@ function checkLevelUp() {
 }
 
 var ANIMATION_FRAME;
-function gameStep(timestamp) {
+var lastTimeStamp = 0;
+var fps = 20;
+
+function gameStep(timeStamp) {
     if (!PAUSED && !GAMEOVER) {
-        ANIMATION_FRAME = ~~(timestamp / 500) % 2;
-        doMovement();
+        var delta = (timeStamp - lastTimeStamp) / fps;
+        console.log(delta);
+        ANIMATION_FRAME = ~~(timeStamp / 500) % 2;
+        doMovement(delta);
         checkCollisions();
-        destroyAndCreate(timestamp);
+        destroyAndCreate(timeStamp);
         checkLevelUp();
     }
     doRendering();
+    lastTimeStamp=timeStamp;
     window.requestAnimationFrame(gameStep);
 }
 
@@ -324,8 +324,9 @@ function gameover() {
     PAUSED = true;
     setTimeout(function() {
         PAUSED = false;
-    }, 1000);
+    }, 5000);
     sounds.play('scream');
+    resetState();
     var gOver = { type: 'gameover',
                   pos: { x: canvas.width / 2,
                          y: canvas.height / 2},
@@ -341,3 +342,15 @@ function gameover() {
 
 initialize();
 window.requestAnimationFrame(gameStep);
+
+
+document.getElementById('pause-control').addEventListener('click', function(e) {
+        if (e.target.classList.contains('paused')) {
+        PAUSED=false;
+        e.target.classList.remove("paused");
+        } else {
+        PAUSED=true;
+        e.target.classList.add("paused");
+        }
+    document.activeElement.blur();
+});

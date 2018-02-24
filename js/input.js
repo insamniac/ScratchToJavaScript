@@ -30,6 +30,7 @@ function handleKeyEvent(e) {
         case 'ArrowLeft':
             if (keydown) {
                 player.dir.x = -1;
+                player.facing = 'left';
             } else {
                 player.dir.x = 0;
             }
@@ -45,6 +46,7 @@ function handleKeyEvent(e) {
         case 'd':
         case 'ArrowRight':
             if (keydown) {
+                player.facing = 'right';
                 player.dir.x = 1;
             } else {
                 player.dir.x = 0;

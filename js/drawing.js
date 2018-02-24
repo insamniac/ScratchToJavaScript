@@ -1,25 +1,5 @@
 // all of our images and some drawing functions
 
-/*
-var images = {
-    witch: loadImage("witch.png"),
-    bullet: loadImage("bullet.svg"),
-    purpleBullet: loadImage("purplestickyball.png"),
-    blueBullet: loadImage("fireworkfreezingiceball.png"),
-    fireBullet: loadImage("fireball.svg"),
-    dragon: loadImage("dragon.png"),
-    blackBat: loadImage("black-bat-1.svg"),
-    brownBat: loadImage("brown-bat-1.svg"),
-    background: loadImage("background.png"),
-    powerup: loadImage("Powerup.svg"),
-    life: loadImage("Life.svg"),
-    ghost: loadImage("Ghost.svg"),
-    ghoul: loadImage("Ghoul.svg"),
-    gameover: loadImage("gameover.png")
-
-};
-*/
-
 var images = {
     background: loadImage('background.png'),
     witch: loadImage('witch.png'),
@@ -36,7 +16,6 @@ var images = {
     ghoul: loadImages(['Ghoul.svg', 'Ghoul2.svg']),
     dragon: loadImage('red-dragon.png'),
     gameover: loadImage('gameover.png')
-
 };
 
 
@@ -101,7 +80,9 @@ function render(obj, ctx) {
     var h = obj.height || obj.size;
         ctx.save();
     ctx.translate(x + w / 2, y + h / 2);
-    if (obj.facing && obj.facing == 'left') {
+
+    // if entity is facing left, we flip the image (This is resource intensive... we should just make more sprites)
+    if (obj.facing === 'left' || (obj.dir && obj.dir.x < 0)) {
         ctx.scale(-1, 1);
         ctx.drawImage(costume, 0, -h, w, h);
     } else {
