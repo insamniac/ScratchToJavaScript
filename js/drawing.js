@@ -154,28 +154,32 @@ function addCostume(target, image, flip) {
     }
 }
 
-
 function explode(obj, img) {
-    img = img || obj.costume;
-    var speed = randomBetween(10, 20);
+    var ballCostume=obj.costume;
+    if (img != null) {
+        ballCostume=img;
+    }
+    //an Array to store the explosion parts so we can destroy them after a second.
+    var balls = [];
     var count = 50;
-    var maxChunk = obj.size / count + 3;
-    var fireballs = [];
-    for (var i = 0; i < count; i++) {
+    var i = 0;
+    while (i < count) {
         var ball = {
-                     costume: img,
-                     size: randomBetween(1, maxChunk),
-                     speed: speed,
+                     costume: ballCostume,
+                     size: randomBetween(1, 5),
+                     speed: 10,
                      pos: {y: obj.pos.y, x: obj.pos.x},
-                     dir: { y: (obj.dir.y * obj.speed) / speed + (Math.random() * -1 + Math.random()),
-                            x: (obj.dir.x * obj.speed) / speed + (Math.random() * -1 + Math.random()) }
+                     dir: { y: obj.dir.y + (Math.random() * -1 + Math.random()),
+                            x: obj.dir.x + (Math.random() * -1 + Math.random()) }
 
         };
-        fireballs.push(ball);
+        balls.push(ball);
         entities.push(ball);
+        i++;
     }
+    // after 0.51 second destroy the explosion balls.
     setTimeout(function() {
-        fireballs.forEach(function(f) {f.destroy = true});
-    }, 1000);
-
+        balls.forEach(function(f) {f.destroy = true});
+    }, 500);
 }
+

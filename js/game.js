@@ -131,6 +131,7 @@ function checkCollisions() {
                         obj1.destroy = true;
                         obj2.destroy = true;
                         explode(obj2);
+                        explode(obj1);
                         if (obj1.type == 'enemy') {
                             sounds.play(obj1.sound);
                             player.score = player.score + 1;
@@ -288,7 +289,6 @@ var fps = 20;
 function gameStep(timeStamp) {
     if (!PAUSED && !GAMEOVER) {
         var delta = (timeStamp - lastTimeStamp) / fps;
-        console.log(delta);
         ANIMATION_FRAME = ~~(timeStamp / 500) % 2;
         doMovement(delta);
         checkCollisions();
