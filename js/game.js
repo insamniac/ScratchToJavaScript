@@ -64,8 +64,8 @@ function resetState() {
         player.pos.y = canvas.height / 2;
         player.dir = {x: 0, y: 0};
         player.size = 100;
-        player.speed=10;
-        player.lives=3;
+        player.speed = 10;
+        player.lives = 3;
         entities = [];
 }
 
@@ -92,7 +92,7 @@ function pointToward(obj1, obj2, precision) {
     }
 }
 
-function move(obj,delta) {
+function move(obj, delta) {
     if (!obj.dir) {
         return;
     }
@@ -217,19 +217,23 @@ function destroyAndCreate(timestamp) {
         nextEnemy = tick + ENEMY_DELAY;
         var m = makeEnemy();
         entities.push(m);
-        console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
+        if (player.level > 5) {
+           m = makeEnemy();
+           entities.push(m);
+        }
+//        console.log('New Enemy Created at: ' + tick + '.  Next At: ' + nextEnemy);
     }
     if (tick >= nextPowerup) {
         nextPowerup = tick + POWERUP_DELAY;
         var p = makePowerup();
         entities.push(p);
-        console.log('New powerup Created at: ' + tick + '.  Next At: ' + nextPowerup);
+  //      console.log('New powerup Created at: ' + tick + '.  Next At: ' + nextPowerup);
     }
     if (tick >= nextLife) {
         nextLife = tick + LIFE_DELAY;
         var p = makeLife();
         entities.push(p);
-        console.log('New Life Created at: ' + tick + '.  Next At: ' + nextLife);
+    //    console.log('New Life Created at: ' + tick + '.  Next At: ' + nextLife);
     }
 }
 
@@ -245,35 +249,35 @@ function checkLevelUp() {
   if (player.score == 15 && player.level == 1) {
       levelUp();
     ENEMY_DELAY -= 1;
-      BG_TINT='green';
+      BG_TINT = 'green';
   }
   if (player.score == 30 && player.level == 2) {
       levelUp();
     player.size += 50;
     BULLET_SPEED += 20;
     ENEMY_DELAY -= 1;
-      BG_TINT='blue';
+      BG_TINT = 'blue';
   }
   if (player.score == 50 && player.level == 3) {
       levelUp();
     BULLET_SPEED += 50;
     player.bullets += 20;
     ENEMY_DELAY -= 1;
-      BG_TINT='grey';
+      BG_TINT = 'grey';
   }
   if (player.score == 100 && player.level == 4) {
       levelUp();
     BULLET_SPEED += 60;
     player.bullets += 30;
     ENEMY_DELAY -= 1;
-      BG_TINT='red';
+      BG_TINT = 'red';
   }
-  if (player.score == 300 && player.level == 5) {
+  if (player.score == 150 && player.level == 5) {
       levelUp();
     player.bullets += 70;
     ENEMY_DELAY -= 1;
   }
-  if (player.score == 500 && player.level == 6) {
+  if (player.score == 250 && player.level == 6) {
       levelUp();
     BULLET_SPEED += 60;
     player.bullets += 150;
@@ -296,7 +300,7 @@ function gameStep(timeStamp) {
         checkLevelUp();
     }
     doRendering();
-    lastTimeStamp=timeStamp;
+    lastTimeStamp = timeStamp;
     window.requestAnimationFrame(gameStep);
 }
 
@@ -343,14 +347,14 @@ function gameover() {
 initialize();
 window.requestAnimationFrame(gameStep);
 
-var PAUSE_CONTROL=document.getElementById('pause-control');
+var PAUSE_CONTROL = document.getElementById('pause-control');
         PAUSE_CONTROL.addEventListener('click', function(e) {
         if (e.target.classList.contains('paused')) {
-        PAUSED=false;
-        e.target.classList.remove("paused");
+        PAUSED = false;
+        e.target.classList.remove('paused');
         } else {
-        PAUSED=true;
-        e.target.classList.add("paused");
+        PAUSED = true;
+        e.target.classList.add('paused');
         }
     document.activeElement.blur();
 });

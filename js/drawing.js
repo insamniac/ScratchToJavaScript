@@ -155,9 +155,9 @@ function addCostume(target, image, flip) {
 }
 
 function explode(obj, img) {
-    var ballCostume=obj.costume;
+    var ballCostume = obj.costume;
     if (img != null) {
-        ballCostume=img;
+        ballCostume = img;
     }
     //an Array to store the explosion parts so we can destroy them after a second.
     var balls = [];

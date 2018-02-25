@@ -5,7 +5,7 @@ window.addEventListener('keydown', handleKeyEvent, false);
 window.addEventListener('keyup', handleKeyEvent, false);
 
 function handleKeyEvent(e) {
-    if (PAUSED && e.key != 'p' && e.key !='m') {
+    if (PAUSED && e.key != 'p' && e.key != 'm') {
         return;
     }
 

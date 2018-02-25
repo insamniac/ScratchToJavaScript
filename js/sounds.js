@@ -39,7 +39,7 @@ sounds.setVolume = function(v) {
 function loadSound(soundName, fileName) {
 	soundName == soundName || fileName;
 	var request = new XMLHttpRequest();
-	  request.open('GET', 'audio/'+ fileName, true);
+	  request.open('GET', 'audio/' + fileName, true);
 	  request.responseType = 'arraybuffer';
 
 	  // Decode asynchronously
@@ -87,7 +87,7 @@ setTimeout(function() {
 },3000);
 
 
-VOLUME_CONTROL=document.getElementById('volume-control');
+VOLUME_CONTROL = document.getElementById('volume-control');
 VOLUME_CONTROL.addEventListener('click', function(e) {
     console.log(e);
     if (e.target.classList.contains('muted')) {
