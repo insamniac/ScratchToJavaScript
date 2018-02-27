@@ -11,6 +11,7 @@ function handleKeyEvent(e) {
 
     if (GAMEOVER) {
         resetState();
+        return;
     }
 
 

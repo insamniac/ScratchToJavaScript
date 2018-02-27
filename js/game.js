@@ -66,6 +66,9 @@ function resetState() {
         player.size = 100;
         player.speed = 10;
         player.lives = 3;
+        player.level=1;
+        player.score=0;
+        player.bullets=20;
         entities = [];
 }
 
@@ -330,7 +333,6 @@ function gameover() {
         PAUSED = false;
     }, 5000);
     sounds.play('scream');
-    resetState();
     var gOver = { type: 'gameover',
                   pos: { x: canvas.width / 2,
                          y: canvas.height / 2},
